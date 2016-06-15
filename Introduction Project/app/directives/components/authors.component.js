@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../services/author.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../../services/author.service', './favorite.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../../services/author.service'], function(exp
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, author_service_1;
+    var core_1, author_service_1, favorite_component_1;
     var AuthorsComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', '../../services/author.service'], function(exp
             },
             function (author_service_1_1) {
                 author_service_1 = author_service_1_1;
+            },
+            function (favorite_component_1_1) {
+                favorite_component_1 = favorite_component_1_1;
             }],
         execute: function() {
             AuthorsComponent = (function () {
@@ -29,8 +32,9 @@ System.register(['angular2/core', '../../services/author.service'], function(exp
                 AuthorsComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "\n    <h2>Authors</h2>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors\">{{ author }}</li>\n    </ul>\n  ",
-                        providers: [author_service_1.AuthorService]
+                        template: "\n    <h2>Authors</h2> <favorite></favorite>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors\">{{ author }}</li>\n    </ul>\n  ",
+                        providers: [author_service_1.AuthorService],
+                        directives: [favorite_component_1.FavoriteComponent]
                     }), 
                     __metadata('design:paramtypes', [author_service_1.AuthorService])
                 ], AuthorsComponent);
