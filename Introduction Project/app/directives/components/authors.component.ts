@@ -5,7 +5,7 @@ import { FavoriteComponent } from './favorite.component';
 @Component({
   selector: 'authors',
   template: `
-    <h2>Authors</h2> <favorite></favorite>
+    <h2>Authors</h2> <favorite [is-favorite]="post.isFavorite"></favorite>
     {{ title }}
     <ul>
       <li *ngFor="#author of authors">{{ author }}</li>
@@ -21,5 +21,11 @@ export class AuthorsComponent {
 
   constructor(authorService: AuthorService) {
     this.authors = authorService.getAuthors();
+  }
+
+  // Post GET from a Server / External API
+  post = {
+    title: "Title",
+    isFavorite: true
   }
 }

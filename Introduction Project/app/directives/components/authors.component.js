@@ -27,12 +27,17 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
             AuthorsComponent = (function () {
                 function AuthorsComponent(authorService) {
                     this.title = "Title for the authors page";
+                    // Post GET from a Server / External API
+                    this.post = {
+                        title: "Title",
+                        isFavorite: true
+                    };
                     this.authors = authorService.getAuthors();
                 }
                 AuthorsComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "\n    <h2>Authors</h2> <favorite></favorite>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors\">{{ author }}</li>\n    </ul>\n  ",
+                        template: "\n    <h2>Authors</h2> <favorite [is-favorite]=\"post.isFavorite\"></favorite>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors\">{{ author }}</li>\n    </ul>\n  ",
                         providers: [author_service_1.AuthorService],
                         directives: [favorite_component_1.FavoriteComponent]
                     }), 
