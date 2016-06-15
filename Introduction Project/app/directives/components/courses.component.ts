@@ -8,12 +8,10 @@ import { AutoGrowDirective } from '../auto-grow.directive';
     <h2>Courses</h2>
     {{ title }}
     <br/>
-    <input type="text"
-      (input)="onInput($event)"
-      [value]="title"
-      autoGrow />
-    <button class="btn btn-primary"
-      [class.active]="isActive"
+    <input type="text" autoGrow
+      (input)="onInput($event)" [value]="title" />
+    <input type="text" [(ngModel)]="title" />
+    <button class="btn btn-primary" [class.active]="isActive"
       [style.backgroundColor]="isActive ? 'blue': 'gray'"
       (click)="onClick($event)" >
       Clear
