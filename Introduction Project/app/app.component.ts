@@ -1,6 +1,6 @@
 import { Component } from 'angular2/core';
-import { CoursesComponent } from './directives/courses.component';
-import { AuthorsComponent } from './directives/authors.component';
+import { CoursesComponent } from './directives/components/courses.component';
+import { AuthorsComponent } from './directives/components/authors.component';
 
 @Component({
     selector: 'my-app',

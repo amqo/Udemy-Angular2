@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/course.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../../services/course.service', '../auto-grow.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../services/course.service'], function(export
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, course_service_1;
+    var core_1, course_service_1, auto_grow_directive_1;
     var CoursesComponent;
     return {
         setters:[
@@ -19,18 +19,23 @@ System.register(['angular2/core', '../services/course.service'], function(export
             },
             function (course_service_1_1) {
                 course_service_1 = course_service_1_1;
+            },
+            function (auto_grow_directive_1_1) {
+                auto_grow_directive_1 = auto_grow_directive_1_1;
             }],
         execute: function() {
             CoursesComponent = (function () {
                 function CoursesComponent(courseService) {
+                    this.isActive = false;
                     this.title = "The title of courses page";
                     this.courses = courseService.getCourses();
                 }
                 CoursesComponent = __decorate([
                     core_1.Component({
                         selector: 'courses',
-                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
-                        providers: [course_service_1.CourseService]
+                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <input type=\"text\" autoGrow />\n    <button class=\"btn btn-primary\" [class.active]=\"isActive\" >Submit</button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
+                        providers: [course_service_1.CourseService],
+                        directives: [auto_grow_directive_1.AutoGrowDirective]
                     }), 
                     __metadata('design:paramtypes', [course_service_1.CourseService])
                 ], CoursesComponent);
