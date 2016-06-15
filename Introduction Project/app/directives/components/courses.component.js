@@ -30,14 +30,18 @@ System.register(['angular2/core', '../../services/course.service', '../auto-grow
                     this.title = "The title of courses page";
                     this.courses = courseService.getCourses();
                 }
+                CoursesComponent.prototype.onInput = function ($event) {
+                    this.title = $event.target.value;
+                };
                 CoursesComponent.prototype.onClick = function ($event) {
                     console.log("Clicked", $event);
                     this.isActive = !this.isActive;
+                    this.title = "";
                 };
                 CoursesComponent = __decorate([
                     core_1.Component({
                         selector: 'courses',
-                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <input type=\"text\" autoGrow />\n    <button class=\"btn btn-primary\"\n      [class.active]=\"isActive\"\n      [style.backgroundColor]=\"isActive ? 'blue': 'gray'\"\n      (click)=\"onClick($event)\" >\n      Submit\n    </button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
+                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <br/>\n    <input type=\"text\"\n      (input)=\"onInput($event)\"\n      [value]=\"title\"\n      autoGrow />\n    <button class=\"btn btn-primary\"\n      [class.active]=\"isActive\"\n      [style.backgroundColor]=\"isActive ? 'blue': 'gray'\"\n      (click)=\"onClick($event)\" >\n      Clear\n    </button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
                         providers: [course_service_1.CourseService],
                         directives: [auto_grow_directive_1.AutoGrowDirective]
                     }), 

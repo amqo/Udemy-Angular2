@@ -7,12 +7,16 @@ import { AutoGrowDirective } from '../auto-grow.directive';
   template: `
     <h2>Courses</h2>
     {{ title }}
-    <input type="text" autoGrow />
+    <br/>
+    <input type="text"
+      (input)="onInput($event)"
+      [value]="title"
+      autoGrow />
     <button class="btn btn-primary"
       [class.active]="isActive"
       [style.backgroundColor]="isActive ? 'blue': 'gray'"
       (click)="onClick($event)" >
-      Submit
+      Clear
     </button>
     <ul>
       <li *ngFor="#course of courses">{{ course }}</li>
@@ -33,8 +37,13 @@ export class CoursesComponent {
     this.courses = courseService.getCourses();
   }
 
+  onInput($event) {
+    this.title = $event.target.value;
+  }
+
   onClick($event) {
     console.log("Clicked", $event);
     this.isActive = !this.isActive;
+    this.title = "";
   }
 }
