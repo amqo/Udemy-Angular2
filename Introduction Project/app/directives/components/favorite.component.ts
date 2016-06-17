@@ -5,7 +5,10 @@ import { Component, Input, Output, EventEmitter } from 'angular2/core';
   templateUrl: 'app/templates/favorite.template.html',
   styles: [`
     .glyphicon-star {
-      color: orange
+      color: orange;
+    }
+    .glyphicon-star-empty {
+      cursor: pointer;
     }
   `],
   // Other way to create input / output properties
