@@ -3,6 +3,11 @@ import { Component, Input, Output, EventEmitter } from 'angular2/core';
 @Component({
   selector: 'favorite',
   templateUrl: 'app/templates/favorite.template.html',
+  styles: [`
+    .glyphicon-star {
+      color: orange
+    }
+  `],
   // Other way to create input / output properties
   // inputs: ['isFavorite:is-favorite'],
   // outputs: ['change:favoriteChange']

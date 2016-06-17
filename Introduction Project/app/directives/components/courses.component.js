@@ -41,7 +41,7 @@ System.register(['angular2/core', '../../services/course.service', '../auto-grow
                 CoursesComponent = __decorate([
                     core_1.Component({
                         selector: 'courses',
-                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <br/>\n    <input type=\"text\" autoGrow\n      (input)=\"onInput($event)\" [value]=\"title\" />\n    <input type=\"text\" [(ngModel)]=\"title\" />\n    <button class=\"btn btn-primary\" [class.active]=\"isActive\"\n      [style.backgroundColor]=\"isActive ? 'blue': 'gray'\"\n      (click)=\"onClick($event)\" >\n      Clear\n    </button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
+                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <br/>\n    <!-- Testing that the style (color: orange) applied to .glyphicon-star from\n         Favorite component is not affecting the class here -->\n    <i class=\"glyphicon glyphicon-star\"></i>\n    <input type=\"text\" autoGrow\n      (input)=\"onInput($event)\" [value]=\"title\" />\n    <input type=\"text\" [(ngModel)]=\"title\" />\n    <button class=\"btn btn-primary\" [class.active]=\"isActive\"\n      [style.backgroundColor]=\"isActive ? 'blue': 'gray'\"\n      (click)=\"onClick($event)\" >\n      Clear\n    </button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
                         providers: [course_service_1.CourseService],
                         directives: [auto_grow_directive_1.AutoGrowDirective]
                     }), 

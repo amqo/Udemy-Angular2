@@ -8,6 +8,9 @@ import { AutoGrowDirective } from '../auto-grow.directive';
     <h2>Courses</h2>
     {{ title }}
     <br/>
+    <!-- Testing that the style (color: orange) applied to .glyphicon-star from
+         Favorite component is not affecting the class here -->
+    <i class="glyphicon glyphicon-star"></i>
     <input type="text" autoGrow
       (input)="onInput($event)" [value]="title" />
     <input type="text" [(ngModel)]="title" />
