@@ -1,0 +1,13 @@
+<div class="voter">
+  <i (click)="onClickUp()"
+    class="glyphicon glyphicon-menu-up vote-button"
+    [class.highlight]="myVote === 1" >
+  </i>
+  <p class="vote-count">
+    {{ voteCount }}
+  </p>
+  <i (click)="onClickDown()"
+    class="glyphicon glyphicon-menu-down vote-button"
+    [class.highlight]="myVote === -1" >
+  </i>
+</div>
