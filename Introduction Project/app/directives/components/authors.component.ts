@@ -13,7 +13,7 @@ import { SummaryPipe } from '../../pipes/summary.pipe';
     </favorite>
     {{ post.title | uppercase }}
     <br/>
-    {{ post.body | summary }}
+    {{ post.body | summary:200 }}
     <br/>
     <ul>
       <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
