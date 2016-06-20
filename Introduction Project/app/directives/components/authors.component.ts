@@ -10,7 +10,7 @@ import { FavoriteComponent } from './favorite.component';
       [is-favorite]="post.isFavorite"
       (favoriteChange)="onFavoriteChange($event)">
     </favorite>
-    {{ title }}
+    {{ title | uppercase }}
     <ul>
       <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
 
