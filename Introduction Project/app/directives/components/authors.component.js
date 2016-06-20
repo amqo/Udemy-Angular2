@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../services/author.service', './favorite.component', '../../pipes/summary.pipe'], function(exports_1, context_1) {
+System.register(['angular2/core', '../../services/author.service', './favorite.component', './bootstrap.panel.component', '../../pipes/summary.pipe'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, author_service_1, favorite_component_1, summary_pipe_1;
+    var core_1, author_service_1, favorite_component_1, bootstrap_panel_component_1, summary_pipe_1;
     var AuthorsComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
             },
             function (favorite_component_1_1) {
                 favorite_component_1 = favorite_component_1_1;
+            },
+            function (bootstrap_panel_component_1_1) {
+                bootstrap_panel_component_1 = bootstrap_panel_component_1_1;
             },
             function (summary_pipe_1_1) {
                 summary_pipe_1 = summary_pipe_1_1;
@@ -44,9 +47,9 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
                 AuthorsComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "\n    <h2>Authors</h2>\n    <favorite\n      [is-favorite]=\"post.isFavorite\"\n      (favoriteChange)=\"onFavoriteChange($event)\">\n    </favorite>\n    {{ post?.title | uppercase }}\n    <br/>\n    {{ post?.body | summary:200 }}\n    <br/>\n    <ul>\n      <li *ngFor=\"#author of authors, #i = index\">\n        {{ i + 1 }} - {{ author }}\n      </li>\n\n      <!-- This template tab is equivalent to the previous *ngFor\n      <template ngFor [ngForOf]=\"courses\" #course #i=index>\n        <li>{{ i + 1 }} - {{ author }}</li>\n      </template> -->\n    </ul>\n  ",
+                        template: "\n    <h2>Authors</h2>\n    <favorite\n      [is-favorite]=\"post.isFavorite\"\n      (favoriteChange)=\"onFavoriteChange($event)\">\n    </favorite>\n    {{ post?.title | uppercase }}\n    <br/>\n    {{ post?.body | summary:200 }}\n    <br/>\n    <ul>\n      <li *ngFor=\"#author of authors, #i = index\">\n        {{ i + 1 }} - {{ author }}\n      </li>\n\n      <!-- This template tab is equivalent to the previous *ngFor\n      <template ngFor [ngForOf]=\"courses\" #course #i=index>\n        <li>{{ i + 1 }} - {{ author }}</li>\n      </template> -->\n    </ul>\n    <br/>\n    <bs-panel>\n      <div class=\"heading\">\n        This is the heading!\n      </div>\n      <div class=\"body\">\n        This is the body added with ng-content!\n      </div>\n    </bs-panel>\n  ",
                         providers: [author_service_1.AuthorService],
-                        directives: [favorite_component_1.FavoriteComponent],
+                        directives: [favorite_component_1.FavoriteComponent, bootstrap_panel_component_1.BootstrapPanel],
                         pipes: [summary_pipe_1.SummaryPipe]
                     }), 
                     __metadata('design:paramtypes', [author_service_1.AuthorService])
