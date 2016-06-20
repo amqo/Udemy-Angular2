@@ -14,8 +14,12 @@ import { AutoGrowDirective } from '../auto-grow.directive';
     <input type="text" autoGrow
       (input)="onInput($event)" [value]="title" />
     <input type="text" [(ngModel)]="title" />
-    <button class="btn btn-primary" [class.active]="isActive"
-      [style.backgroundColor]="isActive ? 'blue': 'gray'"
+    <button class="btn btn-primary"
+      [class.active]="isActive"
+      [ngStyle]="{
+        backgroundColor: isActive ? 'blue': 'gray',
+        fontWeight: isActive ? 'bold': 'normal'
+      }"
       (click)="onClick($event)" >
       Clear
     </button>
