@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div
+    class="panel-heading"
+    (click)="toggle()">
+    {{ title }}
+    <i class="glyphicon pull-right"
+      [ngClass]="{
+        'glyphicon-chevron-down': isZipped,
+        'glyphicon-chevron-up': !isZipped
+      }">
+    </i>
+  </div>
+  <div *ngIf="!isZipped" class="panel-body">
+    <ng-content></ng-content>
+  </div>
+</div>
