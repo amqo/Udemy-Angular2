@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import { AuthorService } from '../../services/author.service';
 import { FavoriteComponent } from './favorite.component';
+import { SummaryPipe } from '../../pipes/summary.pipe';
 
 @Component({
   selector: 'authors',
@@ -10,7 +11,10 @@ import { FavoriteComponent } from './favorite.component';
       [is-favorite]="post.isFavorite"
       (favoriteChange)="onFavoriteChange($event)">
     </favorite>
-    {{ title | uppercase }}
+    {{ post.title | uppercase }}
+    <br/>
+    {{ post.body | summary }}
+    <br/>
     <ul>
       <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
 
@@ -21,11 +25,11 @@ import { FavoriteComponent } from './favorite.component';
     </ul>
   `,
   providers: [AuthorService],
-  directives: [FavoriteComponent]
+  directives: [FavoriteComponent],
+  pipes: [SummaryPipe]
 })
 
 export class AuthorsComponent {
-  title = "Title for the authors page";
   authors: string[];
 
   constructor(authorService: AuthorService) {
@@ -38,7 +42,13 @@ export class AuthorsComponent {
 
   // Post GET from a Server / External API
   post = {
-    title: "Title",
-    isFavorite: true
+    title: "Title for the authors page",
+    isFavorite: true,
+    body: `
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
+      recusandae nulla impedit tenetur. Fugit fugiat, velit culpa, sapiente
+      debitis ullam animi at itaque quisquam nostrum vitae, consequatur eius
+      voluptatibus cupiditate!
+    `
   }
 }
