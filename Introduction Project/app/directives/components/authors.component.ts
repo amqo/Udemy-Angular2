@@ -11,12 +11,14 @@ import { SummaryPipe } from '../../pipes/summary.pipe';
       [is-favorite]="post.isFavorite"
       (favoriteChange)="onFavoriteChange($event)">
     </favorite>
-    {{ post.title | uppercase }}
+    {{ post?.title | uppercase }}
     <br/>
-    {{ post.body | summary:200 }}
+    {{ post?.body | summary:200 }}
     <br/>
     <ul>
-      <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
+      <li *ngFor="#author of authors, #i = index">
+        {{ i + 1 }} - {{ author }}
+      </li>
 
       <!-- This template tab is equivalent to the previous *ngFor
       <template ngFor [ngForOf]="courses" #course #i=index>
