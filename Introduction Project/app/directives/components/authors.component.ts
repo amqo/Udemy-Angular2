@@ -34,6 +34,9 @@ import { SummaryPipe } from '../../pipes/summary.pipe';
       <div class="body">
         This is the body added with ng-content!
       </div>
+      <div class="body">
+        This is another body content added with the same selector!
+      </div>
     </bs-panel>
   `,
   providers: [AuthorService],
