@@ -13,6 +13,11 @@ import { FavoriteComponent } from './favorite.component';
     {{ title }}
     <ul>
       <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
+
+      <!-- This template tab is equivalent to the previous *ngFor
+      <template ngFor [ngForOf]="courses" #course #i=index>
+        <li>{{ i + 1 }} - {{ author }}</li>
+      </template> -->
     </ul>
   `,
   providers: [AuthorService],

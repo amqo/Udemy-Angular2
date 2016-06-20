@@ -41,7 +41,7 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
                 AuthorsComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "\n    <h2>Authors</h2>\n    <favorite\n      [is-favorite]=\"post.isFavorite\"\n      (favoriteChange)=\"onFavoriteChange($event)\">\n    </favorite>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors, #i = index\">{{ i + 1 }} - {{ author }}</li>\n    </ul>\n  ",
+                        template: "\n    <h2>Authors</h2>\n    <favorite\n      [is-favorite]=\"post.isFavorite\"\n      (favoriteChange)=\"onFavoriteChange($event)\">\n    </favorite>\n    {{ title }}\n    <ul>\n      <li *ngFor=\"#author of authors, #i = index\">{{ i + 1 }} - {{ author }}</li>\n\n      <!-- This template tab is equivalent to the previous *ngFor\n      <template ngFor [ngForOf]=\"courses\" #course #i=index>\n        <li>{{ i + 1 }} - {{ author }}</li>\n      </template> -->\n    </ul>\n  ",
                         providers: [author_service_1.AuthorService],
                         directives: [favorite_component_1.FavoriteComponent]
                     }), 
