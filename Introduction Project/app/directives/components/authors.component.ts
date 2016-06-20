@@ -12,7 +12,7 @@ import { FavoriteComponent } from './favorite.component';
     </favorite>
     {{ title }}
     <ul>
-      <li *ngFor="#author of authors">{{ author }}</li>
+      <li *ngFor="#author of authors, #i = index">{{ i + 1 }} - {{ author }}</li>
     </ul>
   `,
   providers: [AuthorService],
