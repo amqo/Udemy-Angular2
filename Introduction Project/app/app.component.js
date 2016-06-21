@@ -1,4 +1,4 @@
-System.register(['angular2/core', './directives/components/courses.component', './directives/components/authors.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './directives/components/courses.component', './directives/components/authors.component', './directives/components/bootstrap.panel.component', './directives/components/contact-form.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './directives/components/courses.component', '
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, courses_component_1, authors_component_1;
+    var core_1, courses_component_1, authors_component_1, bootstrap_panel_component_1, contact_form_component_1;
     var AppComponent;
     return {
         setters:[
@@ -22,6 +22,12 @@ System.register(['angular2/core', './directives/components/courses.component', '
             },
             function (authors_component_1_1) {
                 authors_component_1 = authors_component_1_1;
+            },
+            function (bootstrap_panel_component_1_1) {
+                bootstrap_panel_component_1 = bootstrap_panel_component_1_1;
+            },
+            function (contact_form_component_1_1) {
+                contact_form_component_1 = contact_form_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -30,8 +36,9 @@ System.register(['angular2/core', './directives/components/courses.component', '
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n      <h1>My First Angular 2 App</h1>\n      <courses></courses>\n      <authors></authors>\n    ",
-                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent]
+                        template: "\n      <h1>My First Angular 2 App</h1>\n      <contact-form></contact-form>\n      <courses></courses>\n      <authors></authors>\n      <br/>\n      <bs-panel>\n        <div class=\"heading\">\n          This is the heading!\n        </div>\n        <div class=\"body\">\n          This is the body added with ng-content!\n        </div>\n        <div class=\"body\">\n          This is another body content added with the same selector!\n        </div>\n      </bs-panel>\n    ",
+                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent,
+                            bootstrap_panel_component_1.BootstrapPanel, contact_form_component_1.ContactFormComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

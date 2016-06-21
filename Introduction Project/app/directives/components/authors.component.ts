@@ -1,7 +1,6 @@
 import { Component } from 'angular2/core';
 import { AuthorService } from '../../services/author.service';
 import { FavoriteComponent } from './favorite.component';
-import { BootstrapPanel } from './bootstrap.panel.component';
 import { SummaryPipe } from '../../pipes/summary.pipe';
 
 @Component({
@@ -26,21 +25,9 @@ import { SummaryPipe } from '../../pipes/summary.pipe';
         <li>{{ i + 1 }} - {{ author }}</li>
       </template> -->
     </ul>
-    <br/>
-    <bs-panel>
-      <div class="heading">
-        This is the heading!
-      </div>
-      <div class="body">
-        This is the body added with ng-content!
-      </div>
-      <div class="body">
-        This is another body content added with the same selector!
-      </div>
-    </bs-panel>
   `,
   providers: [AuthorService],
-  directives: [FavoriteComponent, BootstrapPanel],
+  directives: [FavoriteComponent],
   pipes: [SummaryPipe]
 })
 
