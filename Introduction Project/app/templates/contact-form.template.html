@@ -1,4 +1,4 @@
-<form>
+<form #formRoot="ngForm" (ngSubmit)="onSubmit(formRoot.form)">
   <h2>Simple Form</h2>
   <div class="form-group">
     <label for="firstName">First Name</label>
@@ -25,5 +25,9 @@
       Comment is required.
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <button 
+    [disabled]="!formRoot.valid"
+    class="btn btn-primary" type="submit">
+    Submit
+  </button>
 </form>
