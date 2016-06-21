@@ -7,6 +7,8 @@ import { Component } from 'angular2/core';
 
 export class ContactFormComponent {
 
+  // Template driven form
+
   onSubmit(form) {
     console.log(form);
   }

@@ -3,11 +3,13 @@ import { CoursesComponent } from './directives/components/courses.component';
 import { AuthorsComponent } from './directives/components/authors.component';
 import { BootstrapPanel } from './directives/components/bootstrap.panel.component';
 import { ContactFormComponent } from './directives/components/contact-form.component';
+import { SignupFormComponent } from './directives/components/signup-form.component';
 
 @Component({
     selector: 'my-app',
     template: `
       <h1>My First Angular 2 App</h1>
+      <signup-form></signup-form>
       <contact-form></contact-form>
       <courses></courses>
       <authors></authors>
@@ -25,7 +27,7 @@ import { ContactFormComponent } from './directives/components/contact-form.compo
       </bs-panel>
     `,
     directives: [CoursesComponent, AuthorsComponent,
-      BootstrapPanel, ContactFormComponent]
+      BootstrapPanel, ContactFormComponent, SignupFormComponent]
 })
 
 export class AppComponent { }
