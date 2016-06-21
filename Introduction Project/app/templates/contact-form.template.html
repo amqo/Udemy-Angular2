@@ -11,7 +11,7 @@
       </div>
       <div class="alert alert-danger"
         *ngIf="firstName.errors.minlength">
-        First name should be minimum 3 characters.
+        First name should be minimum {{ firstName.errors.minlength.requiredLength }} characters.
       </div>
     </div>
   </div>
