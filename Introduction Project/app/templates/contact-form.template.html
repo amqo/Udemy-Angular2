@@ -5,7 +5,7 @@
     <input ngControl="firstName" #firstName="ngForm" required
       id="firstName" type="text" class="form-control">
     <div class="alert alert-danger"
-      *ngIf="!firstName.valid">
+      *ngIf="!firstName.valid && firstName.touched">
       First name is required.
     </div>
   </div>
@@ -15,7 +15,7 @@
       id="comment" cols="30" rows="10"
       class="form-control"></textarea>
     <div class="alert alert-danger"
-      *ngIf="!comment.valid">
+      *ngIf="!comment.valid && comment.touched">
       Comment is required.
     </div>
   </div>
