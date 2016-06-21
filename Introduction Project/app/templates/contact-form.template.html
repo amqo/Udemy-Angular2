@@ -2,11 +2,17 @@
   <h2>Simple Form</h2>
   <div class="form-group">
     <label for="firstName">First Name</label>
-    <input ngControl="firstName" #firstName="ngForm" required
+    <input ngControl="firstName" #firstName="ngForm" required minlength="3"
       id="firstName" type="text" class="form-control">
-    <div class="alert alert-danger"
-      *ngIf="!firstName.valid && firstName.touched">
-      First name is required.
+    <div *ngIf="firstName.touched && firstName.errors">
+      <div class="alert alert-danger"
+        *ngIf="firstName.errors.required">
+        First name is required.
+      </div>
+      <div class="alert alert-danger"
+        *ngIf="firstName.errors.minlength">
+        First name should be minimum 3 characters.
+      </div>
     </div>
   </div>
   <div class="form-group">
