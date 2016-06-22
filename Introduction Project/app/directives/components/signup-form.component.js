@@ -24,25 +24,26 @@ System.register(['angular2/core', 'angular2/common', '../validators/usernameVali
                 usernameValidators_1 = usernameValidators_1_1;
             }],
         execute: function() {
-            SignupFormComponent = (function () {
-                function SignupFormComponent(formBuilder) {
+            let SignupFormComponent = class SignupFormComponent {
+                constructor(formBuilder) {
                     this.form = formBuilder.group({
-                        username: ['', common_1.Validators.compose([common_1.Validators.required, usernameValidators_1.UsernameValidators.cannotContainSpace])],
+                        username: [
+                            '', common_1.Validators.compose([common_1.Validators.required, usernameValidators_1.UsernameValidators.cannotContainSpace]), usernameValidators_1.UsernameValidators.shouldBeUnique
+                        ],
                         password: ['', common_1.Validators.required],
                     });
                 }
-                SignupFormComponent.prototype.signup = function () {
+                signup() {
                     console.log(this.form.value);
-                };
-                SignupFormComponent = __decorate([
-                    core_1.Component({
-                        selector: 'signup-form',
-                        templateUrl: 'app/templates/signup-form.template.html'
-                    }), 
-                    __metadata('design:paramtypes', [common_1.FormBuilder])
-                ], SignupFormComponent);
-                return SignupFormComponent;
-            }());
+                }
+            };
+            SignupFormComponent = __decorate([
+                core_1.Component({
+                    selector: 'signup-form',
+                    templateUrl: 'app/templates/signup-form.template.html'
+                }), 
+                __metadata('design:paramtypes', [common_1.FormBuilder])
+            ], SignupFormComponent);
             exports_1("SignupFormComponent", SignupFormComponent);
         }
     }

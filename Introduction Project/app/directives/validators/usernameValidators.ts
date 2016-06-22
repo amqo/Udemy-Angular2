@@ -1,3 +1,4 @@
+
 import { Control } from 'angular2/common';
 
 export class UsernameValidators {
@@ -7,5 +8,15 @@ export class UsernameValidators {
         cannotContainSpace: true
       };
       return null;
+  }
+
+  static shouldBeUnique(control: Control) {
+    return new Promise((resolve, reject) => {
+      setTimeout(function() {
+        if (control.value == "some")
+          resolve({ shouldBeUnique: true });
+        else resolve(null);
+      }, 1000);
+    });
   }
 }
