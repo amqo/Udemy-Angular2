@@ -28,9 +28,9 @@ System.register(['angular2/core', 'angular2/common', '../validators/usernameVali
                 constructor(formBuilder) {
                     this.form = formBuilder.group({
                         username: [
-                            '', common_1.Validators.compose([common_1.Validators.required, usernameValidators_1.UsernameValidators.cannotContainSpace]), usernameValidators_1.UsernameValidators.shouldBeUnique
+                            '', common_1.Validators.compose([common_1.Validators.required, usernameValidators_1.UsernameValidators.cannotContainSpace]), common_1.Validators.composeAsync([usernameValidators_1.UsernameValidators.shouldBeUnique])
                         ],
-                        password: ['', common_1.Validators.required],
+                        password: ['', common_1.Validators.required]
                     });
                 }
                 signup() {

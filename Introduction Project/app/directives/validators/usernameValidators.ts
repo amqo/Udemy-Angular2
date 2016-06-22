@@ -1,4 +1,3 @@
-
 import { Control } from 'angular2/common';
 
 export class UsernameValidators {
@@ -11,7 +10,7 @@ export class UsernameValidators {
   }
 
   static shouldBeUnique(control: Control) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       setTimeout(function() {
         if (control.value == "some")
           resolve({ shouldBeUnique: true });

@@ -22,9 +22,11 @@ export class SignupFormComponent {
       username: [
         '', Validators.compose(
           [Validators.required, UsernameValidators.cannotContainSpace]
-        ), UsernameValidators.shouldBeUnique
+        ), Validators.composeAsync(
+          [UsernameValidators.shouldBeUnique]
+        )
       ],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 

@@ -14,7 +14,7 @@ System.register([], function(exports_1, context_1) {
                     return null;
                 }
                 static shouldBeUnique(control) {
-                    return new Promise((resolve, reject) => {
+                    return new Promise(resolve => {
                         setTimeout(function () {
                             if (control.value == "some")
                                 resolve({ shouldBeUnique: true });
