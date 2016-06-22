@@ -34,6 +34,12 @@ System.register(['angular2/core', 'angular2/common', '../validators/usernameVali
                     });
                 }
                 signup() {
+                    // Use service:
+                    // var result = authService.login(this.form.value)
+                    // Check result, and if it's false then:
+                    this.form.find('username').setErrors({
+                        invalidLogin: true
+                    });
                     console.log(this.form.value);
                 }
             };

@@ -31,6 +31,13 @@ export class SignupFormComponent {
   }
 
   signup() {
+    // Use service:
+    // var result = authService.login(this.form.value)
+    // Check result, and if it's false then:
+    this.form.find('username').setErrors({
+      invalidLogin: true
+    });
+
     console.log(this.form.value);
   }
 }
