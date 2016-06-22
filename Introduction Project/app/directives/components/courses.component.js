@@ -24,31 +24,52 @@ System.register(['angular2/core', '../../services/course.service', '../auto-grow
                 auto_grow_directive_1 = auto_grow_directive_1_1;
             }],
         execute: function() {
-            CoursesComponent = (function () {
-                function CoursesComponent(courseService) {
+            let CoursesComponent = class CoursesComponent {
+                constructor(courseService) {
                     this.isActive = true;
                     this.title = "The title of courses page";
                     this.courses = courseService.getCourses();
                 }
-                CoursesComponent.prototype.onInput = function ($event) {
+                onInput($event) {
                     this.title = $event.target.value;
-                };
-                CoursesComponent.prototype.onClick = function ($event) {
+                }
+                onClick($event) {
                     console.log("Clicked", $event);
                     this.isActive = !this.isActive;
                     this.title = "";
-                };
-                CoursesComponent = __decorate([
-                    core_1.Component({
-                        selector: 'courses',
-                        template: "\n    <h2>Courses</h2>\n    {{ title }}\n    <br/>\n    <!-- Testing that the style (color: orange) applied to .glyphicon-star from\n         Favorite component is not affecting the class here -->\n    <i class=\"glyphicon glyphicon-star\"></i>\n    <input type=\"text\" autoGrow\n      (input)=\"onInput($event)\" [value]=\"title\" />\n    <input type=\"text\" [(ngModel)]=\"title\" />\n    <button class=\"btn btn-primary\"\n      [class.active]=\"isActive\"\n      [ngStyle]=\"{\n        backgroundColor: isActive ? 'blue': 'gray',\n        fontWeight: isActive ? 'bold': 'normal'\n      }\"\n      (click)=\"onClick($event)\" >\n      Clear\n    </button>\n    <ul>\n      <li *ngFor=\"#course of courses\">{{ course }}</li>\n    </ul>\n  ",
-                        providers: [course_service_1.CourseService],
-                        directives: [auto_grow_directive_1.AutoGrowDirective]
-                    }), 
-                    __metadata('design:paramtypes', [course_service_1.CourseService])
-                ], CoursesComponent);
-                return CoursesComponent;
-            }());
+                }
+            };
+            CoursesComponent = __decorate([
+                core_1.Component({
+                    selector: 'courses',
+                    template: `
+    <h2>Courses</h2>
+    {{ title }}
+    <br/>
+    <!-- Testing that the style (color: orange) applied to .glyphicon-star from
+         Favorite component is not affecting the class here -->
+    <i class="glyphicon glyphicon-star"></i>
+    <input type="text" autoGrow
+      (input)="onInput($event)" [value]="title" />
+    <input type="text" [(ngModel)]="title" />
+    <button class="btn btn-primary"
+      [class.active]="isActive"
+      [ngStyle]="{
+        backgroundColor: isActive ? 'blue': 'gray',
+        fontWeight: isActive ? 'bold': 'normal'
+      }"
+      (click)="onClick($event)" >
+      Clear
+    </button>
+    <ul>
+      <li *ngFor="#course of courses">{{ course }}</li>
+    </ul>
+  `,
+                    providers: [course_service_1.CourseService],
+                    directives: [auto_grow_directive_1.AutoGrowDirective]
+                }), 
+                __metadata('design:paramtypes', [course_service_1.CourseService])
+            ], CoursesComponent);
             exports_1("CoursesComponent", CoursesComponent);
         }
     }

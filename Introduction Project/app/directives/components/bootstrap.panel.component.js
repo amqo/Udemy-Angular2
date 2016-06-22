@@ -18,18 +18,24 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            BootstrapPanel = (function () {
-                function BootstrapPanel() {
-                }
-                BootstrapPanel = __decorate([
-                    core_1.Component({
-                        selector: 'bs-panel',
-                        template: "\n    <div class=\"panel panel-default\">\n      <div class=\"panel-heading\">\n        <ng-content select=\".heading\" ></ng-content>\n      </div>\n      <div class=\"panel-body\">\n        <ng-content select=\".body\"></ng-content>\n      </div>\n    </div>\n  "
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], BootstrapPanel);
-                return BootstrapPanel;
-            }());
+            let BootstrapPanel = class BootstrapPanel {
+            };
+            BootstrapPanel = __decorate([
+                core_1.Component({
+                    selector: 'bs-panel',
+                    template: `
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <ng-content select=".heading" ></ng-content>
+      </div>
+      <div class="panel-body">
+        <ng-content select=".body"></ng-content>
+      </div>
+    </div>
+  `
+                }), 
+                __metadata('design:paramtypes', [])
+            ], BootstrapPanel);
             exports_1("BootstrapPanel", BootstrapPanel);
         }
     }

@@ -19,20 +19,17 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             }],
         execute: function() {
             DEFAULT_LIMIT = 50;
-            SummaryPipe = (function () {
-                function SummaryPipe() {
-                }
-                SummaryPipe.prototype.transform = function (value, args) {
+            let SummaryPipe = class SummaryPipe {
+                transform(value, args) {
                     var limit = (args && args[0]) ? parseInt(args[0]) : DEFAULT_LIMIT;
                     if (value)
                         return value.substring(0, limit) + " ...";
-                };
-                SummaryPipe = __decorate([
-                    core_1.Pipe({ name: 'summary' }), 
-                    __metadata('design:paramtypes', [])
-                ], SummaryPipe);
-                return SummaryPipe;
-            }());
+                }
+            };
+            SummaryPipe = __decorate([
+                core_1.Pipe({ name: 'summary' }), 
+                __metadata('design:paramtypes', [])
+            ], SummaryPipe);
             exports_1("SummaryPipe", SummaryPipe);
         }
     }

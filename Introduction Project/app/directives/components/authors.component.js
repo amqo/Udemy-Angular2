@@ -27,32 +27,55 @@ System.register(['angular2/core', '../../services/author.service', './favorite.c
                 summary_pipe_1 = summary_pipe_1_1;
             }],
         execute: function() {
-            AuthorsComponent = (function () {
-                function AuthorsComponent(authorService) {
+            let AuthorsComponent = class AuthorsComponent {
+                constructor(authorService) {
                     // Post GET from a Server / External API
                     this.post = {
                         title: "Title for the authors page",
                         isFavorite: true,
-                        body: "\n      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus\n      recusandae nulla impedit tenetur. Fugit fugiat, velit culpa, sapiente\n      debitis ullam animi at itaque quisquam nostrum vitae, consequatur eius\n      voluptatibus cupiditate!\n    "
+                        body: `
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
+      recusandae nulla impedit tenetur. Fugit fugiat, velit culpa, sapiente
+      debitis ullam animi at itaque quisquam nostrum vitae, consequatur eius
+      voluptatibus cupiditate!
+    `
                     };
                     this.authors = authorService.getAuthors();
                 }
-                AuthorsComponent.prototype.onFavoriteChange = function (_a) {
-                    var newValue = _a.newValue;
+                onFavoriteChange({ newValue }) {
                     console.log('Favorite changed to', newValue);
-                };
-                AuthorsComponent = __decorate([
-                    core_1.Component({
-                        selector: 'authors',
-                        template: "\n    <h2>Authors</h2>\n    <favorite\n      [is-favorite]=\"post.isFavorite\"\n      (favoriteChange)=\"onFavoriteChange($event)\">\n    </favorite>\n    {{ post?.title | uppercase }}\n    <br/>\n    {{ post?.body | summary:200 }}\n    <br/>\n    <ul>\n      <li *ngFor=\"#author of authors, #i = index\">\n        {{ i + 1 }} - {{ author }}\n      </li>\n\n      <!-- This template tab is equivalent to the previous *ngFor\n      <template ngFor [ngForOf]=\"courses\" #course #i=index>\n        <li>{{ i + 1 }} - {{ author }}</li>\n      </template> -->\n    </ul>\n  ",
-                        providers: [author_service_1.AuthorService],
-                        directives: [favorite_component_1.FavoriteComponent],
-                        pipes: [summary_pipe_1.SummaryPipe]
-                    }), 
-                    __metadata('design:paramtypes', [author_service_1.AuthorService])
-                ], AuthorsComponent);
-                return AuthorsComponent;
-            }());
+                }
+            };
+            AuthorsComponent = __decorate([
+                core_1.Component({
+                    selector: 'authors',
+                    template: `
+    <h2>Authors</h2>
+    <favorite
+      [is-favorite]="post.isFavorite"
+      (favoriteChange)="onFavoriteChange($event)">
+    </favorite>
+    {{ post?.title | uppercase }}
+    <br/>
+    {{ post?.body | summary:200 }}
+    <br/>
+    <ul>
+      <li *ngFor="#author of authors, #i = index">
+        {{ i + 1 }} - {{ author }}
+      </li>
+
+      <!-- This template tab is equivalent to the previous *ngFor
+      <template ngFor [ngForOf]="courses" #course #i=index>
+        <li>{{ i + 1 }} - {{ author }}</li>
+      </template> -->
+    </ul>
+  `,
+                    providers: [author_service_1.AuthorService],
+                    directives: [favorite_component_1.FavoriteComponent],
+                    pipes: [summary_pipe_1.SummaryPipe]
+                }), 
+                __metadata('design:paramtypes', [author_service_1.AuthorService])
+            ], AuthorsComponent);
             exports_1("AuthorsComponent", AuthorsComponent);
         }
     }

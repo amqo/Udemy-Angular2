@@ -33,20 +33,35 @@ System.register(['angular2/core', './directives/components/courses.component', '
                 signup_form_component_1 = signup_form_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                }
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: 'my-app',
-                        template: "\n      <h1>My First Angular 2 App</h1>\n      <signup-form></signup-form>\n      <contact-form></contact-form>\n      <courses></courses>\n      <authors></authors>\n      <br/>\n      <bs-panel>\n        <div class=\"heading\">\n          This is the heading!\n        </div>\n        <div class=\"body\">\n          This is the body added with ng-content!\n        </div>\n        <div class=\"body\">\n          This is another body content added with the same selector!\n        </div>\n      </bs-panel>\n    ",
-                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent,
-                            bootstrap_panel_component_1.BootstrapPanel, contact_form_component_1.ContactFormComponent, signup_form_component_1.SignupFormComponent]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
-            }());
+            let AppComponent = class AppComponent {
+            };
+            AppComponent = __decorate([
+                core_1.Component({
+                    selector: 'my-app',
+                    template: `
+      <h1>My First Angular 2 App</h1>
+      <signup-form></signup-form>
+      <contact-form></contact-form>
+      <courses></courses>
+      <authors></authors>
+      <br/>
+      <bs-panel>
+        <div class="heading">
+          This is the heading!
+        </div>
+        <div class="body">
+          This is the body added with ng-content!
+        </div>
+        <div class="body">
+          This is another body content added with the same selector!
+        </div>
+      </bs-panel>
+    `,
+                    directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent,
+                        bootstrap_panel_component_1.BootstrapPanel, contact_form_component_1.ContactFormComponent, signup_form_component_1.SignupFormComponent]
+                }), 
+                __metadata('design:paramtypes', [])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
     }
