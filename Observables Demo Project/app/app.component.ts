@@ -23,7 +23,9 @@ export class AppComponent {
         .distinctUntilChanged()
         .flatMap(spotifyService.searchArtists);
 
-      keyups.subscribe(result => console.log(result));
+      var subscription = keyups.subscribe(result => console.log(result));
+      // To unsubscribe from notifications:
+      // subscription.unsubscribe();
 
       // var debounced = _.debounce(text => {
       //   var url = `https://api.spotify.com/v1/search?type=artist&q=${text}`;

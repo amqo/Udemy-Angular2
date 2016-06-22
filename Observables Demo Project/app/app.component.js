@@ -31,7 +31,9 @@ System.register(['angular2/core', 'rxjs/Rx', './spotify.service'], function(expo
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .flatMap(spotifyService.searchArtists);
-                    keyups.subscribe(function (result) { return console.log(result); });
+                    var subscription = keyups.subscribe(function (result) { return console.log(result); });
+                    // To unsubscribe from notifications:
+                    // subscription.unsubscribe();
                     // var debounced = _.debounce(text => {
                     //   var url = `https://api.spotify.com/v1/search?type=artist&q=${text}`;
                     //   $.getJSON(url, artists => {
