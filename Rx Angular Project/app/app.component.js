@@ -32,6 +32,7 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     this.createArrayObservables();
                     this.createDifferentObservables();
                     this.createIntervalObservable();
+                    this.createForkObservables();
                 }
                 AppComponent.prototype.getDatesArray = function (dayWindow) {
                     var startDates = [];
@@ -79,6 +80,19 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                         return Rx_1.Observable.of(["News 1", "News 2", "News 3"]);
                     })
                         .subscribe(function (news) { return console.log(news); });
+                };
+                AppComponent.prototype.createForkObservables = function () {
+                    var userStream = Rx_1.Observable.of({
+                        userId: 1, username: 'Alberto'
+                    }).delay(2000);
+                    var tweetStream = Rx_1.Observable.of([
+                        1, 2, 3, 4, 5
+                    ]).delay(1500);
+                    Rx_1.Observable.forkJoin(userStream, tweetStream)
+                        .map(function (joined) { return new Object({
+                        user: joined[0], tweets: joined[1]
+                    }); })
+                        .subscribe(function (result) { return console.log("From fork join", result); });
                 };
                 AppComponent = __decorate([
                     core_1.Component({

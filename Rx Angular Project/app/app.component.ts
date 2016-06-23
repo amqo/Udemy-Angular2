@@ -76,6 +76,22 @@ export class AppComponent {
       .subscribe(news => console.log(news));
   }
 
+  createForkObservables() {
+    var userStream = Observable.of({
+      userId: 1, username: 'Alberto'
+    }).delay(2000);
+
+    var tweetStream = Observable.of([
+      1, 2 , 3, 4, 5
+    ]).delay(1500);
+
+    Observable.forkJoin(userStream, tweetStream)
+      .map(joined => new Object({
+        user: joined[0], tweets: joined[1]
+      }))
+      .subscribe(result => console.log("From fork join", result));
+  }
+
   constructor(fb: FormBuilder) {
     this.form = fb.group({
       search: []
@@ -88,5 +104,7 @@ export class AppComponent {
     this.createDifferentObservables();
 
     this.createIntervalObservable();
+
+    this.createForkObservables();
   }
 }
