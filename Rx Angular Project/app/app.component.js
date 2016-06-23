@@ -28,20 +28,10 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     this.form = fb.group({
                         search: []
                     });
-                    var search = this.form.find('search');
-                    var observable = search.valueChanges;
-                    observable.debounceTime(400)
-                        .map(function (str) { return str.replace(' ', '-'); })
-                        .subscribe(function (x) { return console.log(x); });
-                    var arrayObservable = Rx_1.Observable.fromArray([1, 2, 3]);
-                    arrayObservable.subscribe(function (str) { return console.log('From array observable', str); });
-                    var datesArray = this.getDatesArray(2);
-                    Rx_1.Observable.fromArray(datesArray)
-                        .map(function (date) {
-                        console.log('Getting deals for date', date);
-                        return ["Flight 1", "Flight 2", "Flight 3"];
-                    })
-                        .subscribe(function (x) { return console.log(x); });
+                    this.createDOMEventObservable();
+                    this.createArrayObservables();
+                    this.createDifferentObservables();
+                    this.createIntervalObservable();
                 }
                 AppComponent.prototype.getDatesArray = function (dayWindow) {
                     var startDates = [];
@@ -51,6 +41,44 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                         startDates.push(date);
                     }
                     return startDates;
+                };
+                AppComponent.prototype.createDOMEventObservable = function () {
+                    var search = this.form.find('search');
+                    var observable = search.valueChanges;
+                    observable.debounceTime(400)
+                        .map(function (str) { return str.replace(' ', '-'); })
+                        .subscribe(function (x) { return console.log(x); });
+                };
+                AppComponent.prototype.createArrayObservables = function () {
+                    var arrayObservable = Rx_1.Observable.fromArray([1, 2, 3]);
+                    arrayObservable.subscribe(function (str) { return console.log('From array observable', str); });
+                    var datesArray = this.getDatesArray(2);
+                    Rx_1.Observable.fromArray(datesArray)
+                        .map(function (date) {
+                        console.log('Getting deals for date', date);
+                        return ["Flight 1", "Flight 2", "Flight 3"];
+                    })
+                        .subscribe(function (x) { return console.log(x); });
+                };
+                AppComponent.prototype.createDifferentObservables = function () {
+                    Rx_1.Observable.empty()
+                        .subscribe(function (x) { return console.log('From empty observable', x); });
+                    Rx_1.Observable.range(1, 5)
+                        .subscribe(function (x) { return console.log('From range observable', x); });
+                    Rx_1.Observable.fromArray([1, 2, 3])
+                        .subscribe(function (x) { return console.log('From array observable', x); });
+                    Rx_1.Observable.of(1, 3, 5)
+                        .subscribe(function (x) { return console.log("From 'of' observable", x); });
+                };
+                AppComponent.prototype.createIntervalObservable = function () {
+                    var observable = Rx_1.Observable.interval(5000);
+                    observable
+                        .flatMap(function (x) {
+                        console.log("Calling the server to get the latest news at", x);
+                        //Here it would be an Observable.fromPromise using a service
+                        return Rx_1.Observable.of(["News 1", "News 2", "News 3"]);
+                    })
+                        .subscribe(function (news) { return console.log(news); });
                 };
                 AppComponent = __decorate([
                     core_1.Component({
