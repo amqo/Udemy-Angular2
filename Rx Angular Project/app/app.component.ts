@@ -136,6 +136,22 @@ export class AppComponent {
       );
   }
 
+  createCompletedCallbackObservable() {
+    Observable.throw(new Error("error"))
+      .subscribe(
+        x => console.log("From Completed error Observable", x),
+        error => console.log(error),
+        () => console.log("Completed error Observable")
+      );
+
+    Observable.fromArray([4, 6, 8])
+      .subscribe(
+        x => console.log("From Completed array Observable", x),
+        error => console.log(error),
+        () => console.log("Completed array Observable")
+      );
+  }
+
   constructor(fb: FormBuilder) {
     this.form = fb.group({
       search: []
@@ -150,5 +166,6 @@ export class AppComponent {
     this.simulateErrorTryHandling();
     this.simulateErrorTryCatchHandling();
     this.simulateTimeoutObservable();
+    this.createCompletedCallbackObservable();
   }
 }

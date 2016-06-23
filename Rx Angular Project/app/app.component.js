@@ -37,6 +37,7 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     this.simulateErrorTryHandling();
                     this.simulateErrorTryCatchHandling();
                     this.simulateTimeoutObservable();
+                    this.createCompletedCallbackObservable();
                 }
                 AppComponent.prototype.getDatesArray = function (dayWindow) {
                     var startDates = [];
@@ -125,6 +126,12 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     var remoteDataStream = Rx_1.Observable.of([1, 2, 3]).delay(5 * 1000);
                     remoteDataStream.timeout(1 * 1000)
                         .subscribe(function (x) { return console.log(x); }, function (error) { return console.error(error); });
+                };
+                AppComponent.prototype.createCompletedCallbackObservable = function () {
+                    Rx_1.Observable.throw(new Error("error"))
+                        .subscribe(function (x) { return console.log("From Completed error Observable", x); }, function (error) { return console.log(error); }, function () { return console.log("Completed error Observable"); });
+                    Rx_1.Observable.fromArray([4, 6, 8])
+                        .subscribe(function (x) { return console.log("From Completed array Observable", x); }, function (error) { return console.log(error); }, function () { return console.log("Completed array Observable"); });
                 };
                 AppComponent = __decorate([
                     core_1.Component({
