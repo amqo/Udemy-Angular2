@@ -31,8 +31,10 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     this.createDOMEventObservable();
                     this.createArrayObservables();
                     this.createDifferentObservables();
-                    this.createIntervalObservable();
+                    this.createIntervalObservable(3600);
                     this.createForkObservables();
+                    this.simulateErrorHandling();
+                    this.simulateErrorTryHandling();
                 }
                 AppComponent.prototype.getDatesArray = function (dayWindow) {
                     var startDates = [];
@@ -71,8 +73,8 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     Rx_1.Observable.of(1, 3, 5)
                         .subscribe(function (x) { return console.log("From 'of' observable", x); });
                 };
-                AppComponent.prototype.createIntervalObservable = function () {
-                    var observable = Rx_1.Observable.interval(5000);
+                AppComponent.prototype.createIntervalObservable = function (seconds) {
+                    var observable = Rx_1.Observable.interval(seconds * 1000);
                     observable
                         .flatMap(function (x) {
                         console.log("Calling the server to get the latest news at", x);
@@ -93,6 +95,21 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                         user: joined[0], tweets: joined[1]
                     }); })
                         .subscribe(function (result) { return console.log("From fork join", result); });
+                };
+                AppComponent.prototype.simulateErrorHandling = function () {
+                    var observable = Rx_1.Observable.throw(new Error("Something failed"));
+                    observable.subscribe(function (x) { return console.log(x); }, function (error) { return console.error(error); });
+                };
+                AppComponent.prototype.simulateErrorTryHandling = function () {
+                    var counter = 0;
+                    var ajaxCall = Rx_1.Observable.of('url')
+                        .flatMap(function () {
+                        if (++counter < 2)
+                            return Rx_1.Observable.throw(new Error("Request failed"));
+                        return Rx_1.Observable.of([1, 2, 3, "After retry"]);
+                    });
+                    ajaxCall.retry(3)
+                        .subscribe(function (x) { return console.log(x); }, function (error) { return console.error(error); });
                 };
                 AppComponent = __decorate([
                     core_1.Component({

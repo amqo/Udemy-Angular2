@@ -65,8 +65,8 @@ export class AppComponent {
       .subscribe(x => console.log("From 'of' observable", x));
   }
 
-  createIntervalObservable() {
-    let observable = Observable.interval(5000);
+  createIntervalObservable(seconds: number) {
+    let observable = Observable.interval(seconds * 1000);
     observable
       .flatMap(x => {
         console.log("Calling the server to get the latest news at",x)
@@ -92,6 +92,30 @@ export class AppComponent {
       .subscribe(result => console.log("From fork join", result));
   }
 
+  simulateErrorHandling() {
+    var observable = Observable.throw(new Error("Something failed"));
+    observable.subscribe(
+      x => console.log(x),
+      error => console.error(error)
+    );
+  }
+
+  simulateErrorTryHandling() {
+    var counter = 0;
+    var ajaxCall = Observable.of('url')
+      .flatMap(() => {
+        if (++counter < 2)
+          return Observable.throw(new Error("Request failed"));
+        return Observable.of([1, 2, 3, "After retry"]);
+      });
+
+    ajaxCall.retry(3)
+    .subscribe(
+      x => console.log(x),
+      error => console.error(error)
+    );
+  }
+
   constructor(fb: FormBuilder) {
     this.form = fb.group({
       search: []
@@ -103,8 +127,12 @@ export class AppComponent {
 
     this.createDifferentObservables();
 
-    this.createIntervalObservable();
+    this.createIntervalObservable(3600);
 
     this.createForkObservables();
+
+    this.simulateErrorHandling();
+
+    this.simulateErrorTryHandling();
   }
 }
