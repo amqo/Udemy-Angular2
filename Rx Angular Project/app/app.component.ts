@@ -116,23 +116,39 @@ export class AppComponent {
     );
   }
 
+  simulateErrorTryCatchHandling() {
+    var remoteDataStream = Observable.throw(new Error("Something failed"));
+    // var remoteDataStream = Observable.of([4, 5, 6]);
+
+    remoteDataStream.catch(err => {
+      var localDataStream = Observable.of([1, 2, 3, "After catch"]);
+      return localDataStream;
+    }).subscribe(x => console.log(x));
+  }
+
+  simulateTimeoutObservable() {
+    var remoteDataStream = Observable.of([1, 2, 3]).delay(5 * 1000);
+
+    remoteDataStream.timeout(1 * 1000)
+      .subscribe(
+        x => console.log(x),
+        error => console.error(error)
+      );
+  }
+
   constructor(fb: FormBuilder) {
     this.form = fb.group({
       search: []
     });
 
     this.createDOMEventObservable();
-
     this.createArrayObservables();
-
     this.createDifferentObservables();
-
     this.createIntervalObservable(3600);
-
     this.createForkObservables();
-
     this.simulateErrorHandling();
-
     this.simulateErrorTryHandling();
+    this.simulateErrorTryCatchHandling();
+    this.simulateTimeoutObservable();
   }
 }

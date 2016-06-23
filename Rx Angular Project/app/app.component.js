@@ -35,6 +35,8 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                     this.createForkObservables();
                     this.simulateErrorHandling();
                     this.simulateErrorTryHandling();
+                    this.simulateErrorTryCatchHandling();
+                    this.simulateTimeoutObservable();
                 }
                 AppComponent.prototype.getDatesArray = function (dayWindow) {
                     var startDates = [];
@@ -109,6 +111,19 @@ System.register(['angular2/core', 'angular2/common', 'rxjs/Rx'], function(export
                         return Rx_1.Observable.of([1, 2, 3, "After retry"]);
                     });
                     ajaxCall.retry(3)
+                        .subscribe(function (x) { return console.log(x); }, function (error) { return console.error(error); });
+                };
+                AppComponent.prototype.simulateErrorTryCatchHandling = function () {
+                    var remoteDataStream = Rx_1.Observable.throw(new Error("Something failed"));
+                    // var remoteDataStream = Observable.of([4, 5, 6]);
+                    remoteDataStream.catch(function (err) {
+                        var localDataStream = Rx_1.Observable.of([1, 2, 3, "After catch"]);
+                        return localDataStream;
+                    }).subscribe(function (x) { return console.log(x); });
+                };
+                AppComponent.prototype.simulateTimeoutObservable = function () {
+                    var remoteDataStream = Rx_1.Observable.of([1, 2, 3]).delay(5 * 1000);
+                    remoteDataStream.timeout(1 * 1000)
                         .subscribe(function (x) { return console.log(x); }, function (error) { return console.error(error); });
                 };
                 AppComponent = __decorate([
