@@ -2,6 +2,7 @@ import { Injectable } from 'angular2/core'
 import { Http } from 'angular2/http';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 
 import { Post } from '../model/post';
@@ -18,6 +19,12 @@ export class PostService {
   getPosts(): Observable<Post[]> {
     return this._http.get(this._url)
       .map(res => res.json());
+  }
+
+  getPostsPromise(): Promise<Post[]> {
+    return this._http.get(this._url)
+      .map(res => res.json())
+      .toPromise();
   }
 
   createPost(post: Post) {

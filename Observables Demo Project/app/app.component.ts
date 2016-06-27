@@ -35,6 +35,12 @@ export class AppComponent implements OnInit {
         setTimeout(() => this.isLoading = false, 500);
         console.log(posts[0].body)
       });
+
+      this._postService.getPostsPromise()
+        .then(posts => {
+          setTimeout(() => this.isLoading = false, 500);
+          console.log(posts[0].body)
+        });
   }
 
   initSearchInput() {

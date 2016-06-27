@@ -49,6 +49,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                         setTimeout(function () { return _this.isLoading = false; }, 500);
                         console.log(posts[0].body);
                     });
+                    this._postService.getPostsPromise()
+                        .then(function (posts) {
+                        setTimeout(function () { return _this.isLoading = false; }, 500);
+                        console.log(posts[0].body);
+                    });
                 };
                 AppComponent.prototype.initSearchInput = function () {
                     var keyups = Rx_1.Observable.fromEvent($("#search"), "keyup")
