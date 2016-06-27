@@ -35,8 +35,9 @@ System.register(['angular2/core', './services/post.service', 'angular2/http'], f
                     var _this = this;
                     this._postService.getPosts()
                         .subscribe(function (posts) {
-                        setTimeout(function () { return _this.isLoading = false; }, 500);
                         _this.content = posts[0].body;
+                    }, null, function () {
+                        setTimeout(function () { return _this.isLoading = false; }, 500);
                     });
                     this._postService.getPostsPromise()
                         .then(function (posts) {

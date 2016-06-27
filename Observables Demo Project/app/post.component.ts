@@ -23,11 +23,12 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this._postService.getPosts()
       .subscribe(posts => {
-        setTimeout(() => this.isLoading = false, 500);
         this.content = posts[0].body;
+      }, null, () => {
+        setTimeout(() => this.isLoading = false, 500);
       });
 
     this._postService.getPostsPromise()
