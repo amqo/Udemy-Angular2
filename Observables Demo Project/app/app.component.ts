@@ -2,65 +2,25 @@
 
 import { Component, OnInit } from 'angular2/core';
 
-import { HTTP_PROVIDERS } from 'angular2/http';
 import { Observable } from 'rxjs/Rx';
 
-import { PostService } from './services/post.service';
 import { SpotifyService } from './services/spotify.service';
-import { GithubService } from './services/github.service';
 
+import { GithubProfileComponent } from './github.component';
+import { PostComponent } from './post.component';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/main.template.html',
-    providers: [SpotifyService, PostService, GithubService, HTTP_PROVIDERS]
+    templateUrl: 'app/templates/main.template.html',
+    directives: [GithubProfileComponent, PostComponent],
+    providers: [SpotifyService]
 })
 export class AppComponent implements OnInit {
 
-  isLoading = true;
-  isLoadingGithub = true;
-  userInfo = {}
-  userFollowers = []
-
-  constructor(
-    private _spotifyService: SpotifyService,
-    private _postService: PostService,
-    private _githubService: GithubService
-  ) {
-      // this._postService.createPost(
-      //   {userId: 1, title: "a", body: "b"}
-      // );
-  }
+  constructor(private _spotifyService: SpotifyService) {  }
 
   ngOnInit() {
-    this.getPostsFromService();
     this.initSearchInput();
-    this.initGithubSearchInput();
-  }
-
-  getPostsFromService() {
-    this._postService.getPosts()
-      .subscribe(posts => {
-        setTimeout(() => this.isLoading = false, 500);
-        this.content = posts[0].body;
-      });
-
-      this._postService.getPostsPromise()
-        .then(posts => {
-          setTimeout(() => this.isLoading = false, 500);
-          console.log(posts[0].body)
-        });
-  }
-
-  initGithubSearchInput() {
-
-    this._githubService.getGithubInfoFor('octocat')
-      .subscribe(res => {
-        this.userInfo = res.userInfo;
-        this.userFollowers = res.userFollowers;
-      }, null, () => {
-        this.isLoadingGithub = false;
-      }));
   }
 
   initSearchInput() {

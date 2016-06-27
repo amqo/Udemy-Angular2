@@ -22,7 +22,6 @@ export class GithubService {
         this._http.get(urlUsers),
         this._http.get(urlFollowers)
     ).map(res => {
-      console.log(res);
       return { userInfo: res[0].json(), userFollowers: res[1].json() }
     });
   }

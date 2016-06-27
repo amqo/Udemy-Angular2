@@ -1,11 +1,3 @@
-<input id="search" type="text"
-  class="form-control" placeholder="Search for artists...">
-<br/>
-<div *ngIf="isLoading">
-  <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true"></i>
-</div>
-<div *ngIf="!isLoading">{{ content }}</div>
-<br/>
 <div *ngIf="isLoadingGithub">
   <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true"></i>
 </div>
@@ -13,13 +5,13 @@
   <h3>
     @{{ userInfo.login }}
   </h3>
-  <img class="avatar" src="{{userInfo.avatar_url}}" alt="avatar" />
+  <img class="avatar" src="{{ userInfo.avatar_url }}" alt="avatar" />
   <br/>
   <br/>
   <h3>Followers</h3>
   <div class="media" *ngFor="#follower of userFollowers">
     <div class="media-left">
-      <img class="media-object avatar" src="{{follower.avatar_url}}" alt="avatar" />
+      <img class="media-object avatar" src="{{ follower.avatar_url }}" alt="avatar" />
     </div>
     <div class="media-body">
       <h4>{{ follower.login }}</h4>

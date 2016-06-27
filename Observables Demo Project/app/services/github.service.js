@@ -33,7 +33,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'rxj
                     var urlUsers = "" + this._urlUsers + username;
                     var urlFollowers = urlUsers + "/followers";
                     return Observable_1.Observable.forkJoin(this._http.get(urlUsers), this._http.get(urlFollowers)).map(function (res) {
-                        console.log(res);
                         return { userInfo: res[0].json(), userFollowers: res[1].json() };
                     });
                 };
