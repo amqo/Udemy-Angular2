@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   getPostsFromService() {
     this._postService.getPosts()
-      .subscribe(posts => console.log(posts));
+      .subscribe(posts => console.log(posts[0].body));
   }
 
   initSearchInput() {
@@ -56,5 +56,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _spotifyService: SpotifyService,
-    private _postService: PostService) { }
+    private _postService: PostService) {
+      // this._postService.createPost(
+      //   {userId: 1, title: "a", body: "b"}
+      // );
+  }
 }

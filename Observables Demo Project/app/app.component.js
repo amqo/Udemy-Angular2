@@ -33,6 +33,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 function AppComponent(_spotifyService, _postService) {
                     this._spotifyService = _spotifyService;
                     this._postService = _postService;
+                    // this._postService.createPost(
+                    //   {userId: 1, title: "a", body: "b"}
+                    // );
                 }
                 AppComponent.prototype.ngOnInit = function () {
                     this.getPostsFromService();
@@ -40,7 +43,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 };
                 AppComponent.prototype.getPostsFromService = function () {
                     this._postService.getPosts()
-                        .subscribe(function (posts) { return console.log(posts); });
+                        .subscribe(function (posts) { return console.log(posts[0].body); });
                 };
                 AppComponent.prototype.initSearchInput = function () {
                     var keyups = Rx_1.Observable.fromEvent($("#search"), "keyup")
