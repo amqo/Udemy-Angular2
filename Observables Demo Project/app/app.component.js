@@ -1,5 +1,5 @@
 /// <reference path="../typings/tsd.d.ts" />
-System.register(['angular2/core', 'rxjs/Rx', './spotify.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.service', './services/spotify.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,28 +9,46 @@ System.register(['angular2/core', 'rxjs/Rx', './spotify.service'], function(expo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Rx_1, spotify_service_1;
+    var core_1, http_1, Rx_1, post_service_1, spotify_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
             function (Rx_1_1) {
                 Rx_1 = Rx_1_1;
+            },
+            function (post_service_1_1) {
+                post_service_1 = post_service_1_1;
             },
             function (spotify_service_1_1) {
                 spotify_service_1 = spotify_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(spotifyService) {
+                function AppComponent(_spotifyService, _postService) {
+                    this._spotifyService = _spotifyService;
+                    this._postService = _postService;
+                }
+                AppComponent.prototype.ngOnInit = function () {
+                    this.getPostsFromService();
+                    this.initSearchInput();
+                };
+                AppComponent.prototype.getPostsFromService = function () {
+                    this._postService.getPosts()
+                        .subscribe(function (posts) { return console.log(posts); });
+                };
+                AppComponent.prototype.initSearchInput = function () {
                     var keyups = Rx_1.Observable.fromEvent($("#search"), "keyup")
                         .map(function (event) { return event.target.value; })
                         .filter(function (term) { return term.length > 2; })
                         .debounceTime(400)
                         .distinctUntilChanged()
-                        .flatMap(spotifyService.searchArtists);
+                        .flatMap(this._spotifyService.searchArtists);
                     var subscription = keyups.subscribe(function (result) { return console.log(result); });
                     // To unsubscribe from notifications:
                     // subscription.unsubscribe();
@@ -46,14 +64,14 @@ System.register(['angular2/core', 'rxjs/Rx', './spotify.service'], function(expo
                     //   if (text.length < 3) return;
                     //   debounced(text);
                     // });
-                }
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         template: "\n        <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search for artists...\">\n    ",
-                        providers: [spotify_service_1.SpotifyService]
+                        providers: [spotify_service_1.SpotifyService, post_service_1.PostService, http_1.HTTP_PROVIDERS]
                     }), 
-                    __metadata('design:paramtypes', [spotify_service_1.SpotifyService])
+                    __metadata('design:paramtypes', [spotify_service_1.SpotifyService, post_service_1.PostService])
                 ], AppComponent);
                 return AppComponent;
             })();
