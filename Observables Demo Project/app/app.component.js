@@ -33,6 +33,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 function AppComponent(_spotifyService, _postService) {
                     this._spotifyService = _spotifyService;
                     this._postService = _postService;
+                    this.isLoading = true;
                     // this._postService.createPost(
                     //   {userId: 1, title: "a", body: "b"}
                     // );
@@ -42,8 +43,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                     this.initSearchInput();
                 };
                 AppComponent.prototype.getPostsFromService = function () {
+                    var _this = this;
                     this._postService.getPosts()
-                        .subscribe(function (posts) { return console.log(posts[0].body); });
+                        .subscribe(function (posts) {
+                        setTimeout(function () { return _this.isLoading = false; }, 500);
+                        console.log(posts[0].body);
+                    });
                 };
                 AppComponent.prototype.initSearchInput = function () {
                     var keyups = Rx_1.Observable.fromEvent($("#search"), "keyup")
@@ -71,7 +76,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search for artists...\">\n    ",
+                        template: "\n        <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search for artists...\">\n        <br/>\n        <div *ngIf=\"isLoading\">\n          <i class=\"fa fa-spinner fa-spin fa-3x\" aria-hidden=\"true\"></i>\n        </div>\n    ",
                         providers: [spotify_service_1.SpotifyService, post_service_1.PostService, http_1.HTTP_PROVIDERS]
                     }), 
                     __metadata('design:paramtypes', [spotify_service_1.SpotifyService, post_service_1.PostService])
