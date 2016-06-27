@@ -1,5 +1,5 @@
 /// <reference path="../typings/tsd.d.ts" />
-System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.service', './services/spotify.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.service', './services/spotify.service', './services/github.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,7 +9,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, Rx_1, post_service_1, spotify_service_1;
+    var core_1, http_1, Rx_1, post_service_1, spotify_service_1, github_service_1;
     var AppComponent;
     return {
         setters:[
@@ -27,13 +27,20 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
             },
             function (spotify_service_1_1) {
                 spotify_service_1 = spotify_service_1_1;
+            },
+            function (github_service_1_1) {
+                github_service_1 = github_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_spotifyService, _postService) {
+                function AppComponent(_spotifyService, _postService, _githubService) {
                     this._spotifyService = _spotifyService;
                     this._postService = _postService;
+                    this._githubService = _githubService;
                     this.isLoading = true;
+                    this.isLoadingGithub = true;
+                    this.userInfo = {};
+                    this.userFollowers = [];
                     // this._postService.createPost(
                     //   {userId: 1, title: "a", body: "b"}
                     // );
@@ -41,19 +48,31 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 AppComponent.prototype.ngOnInit = function () {
                     this.getPostsFromService();
                     this.initSearchInput();
+                    this.initGithubSearchInput();
                 };
                 AppComponent.prototype.getPostsFromService = function () {
                     var _this = this;
                     this._postService.getPosts()
                         .subscribe(function (posts) {
                         setTimeout(function () { return _this.isLoading = false; }, 500);
-                        console.log(posts[0].body);
+                        _this.content = posts[0].body;
                     });
                     this._postService.getPostsPromise()
                         .then(function (posts) {
                         setTimeout(function () { return _this.isLoading = false; }, 500);
                         console.log(posts[0].body);
                     });
+                };
+                AppComponent.prototype.initGithubSearchInput = function () {
+                    var _this = this;
+                    this._githubService.getGithubInfoFor('octocat')
+                        .subscribe(function (res) {
+                        _this.userInfo = res.userInfo;
+                        _this.userFollowers = res.userFollowers;
+                    }, null, function () {
+                        _this.isLoadingGithub = false;
+                    });
+                    ;
                 };
                 AppComponent.prototype.initSearchInput = function () {
                     var keyups = Rx_1.Observable.fromEvent($("#search"), "keyup")
@@ -81,10 +100,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './services/post.s
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search for artists...\">\n        <br/>\n        <div *ngIf=\"isLoading\">\n          <i class=\"fa fa-spinner fa-spin fa-3x\" aria-hidden=\"true\"></i>\n        </div>\n    ",
-                        providers: [spotify_service_1.SpotifyService, post_service_1.PostService, http_1.HTTP_PROVIDERS]
+                        templateUrl: 'app/main.template.html',
+                        providers: [spotify_service_1.SpotifyService, post_service_1.PostService, github_service_1.GithubService, http_1.HTTP_PROVIDERS]
                     }), 
-                    __metadata('design:paramtypes', [spotify_service_1.SpotifyService, post_service_1.PostService])
+                    __metadata('design:paramtypes', [spotify_service_1.SpotifyService, post_service_1.PostService, github_service_1.GithubService])
                 ], AppComponent);
                 return AppComponent;
             })();

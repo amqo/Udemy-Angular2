@@ -12,9 +12,7 @@ export class PostService {
 
   private _url = "http://jsonplaceholder.typicode.com/posts";
 
-  constructor(private _http: Http) {
-
-  }
+  constructor(private _http: Http) { }
 
   getPosts(): Observable<Post[]> {
     return this._http.get(this._url)
