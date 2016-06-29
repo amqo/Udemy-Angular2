@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found.component';
   { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
   { path: '/users', name: 'Users', component: UsersComponent },
   { path: '/users/new', name: 'UsersNew', component: UsersNewComponent },
+  { path: '/users/:id', name: 'EditUser', component: UsersNewComponent },
   { path: '/posts', name: 'Posts', component: PostsComponent },
   { path: '/not-found', name: 'NotFound', component: NotFoundComponent },
   { path: '/*other', name: 'Other', redirectTo: ['Home'] }
