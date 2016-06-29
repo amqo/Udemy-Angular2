@@ -1,11 +1,13 @@
 import { Component, OnInit } from 'angular2/core';
+import { RouterLink, ROUTER_DIRECTIVES } from 'angular2/router';
 
 import { UsersService } from './users.service';
 
 @Component({
   selector: 'users',
   templateUrl: 'app/users.component.html',
-  providers: [UsersService]
+  providers: [UsersService],
+  directives: [ROUTER_DIRECTIVES]
 })
 
 export class UsersComponent implements OnInit {

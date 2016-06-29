@@ -6,8 +6,7 @@
         <div class="form-group">
           <legend>User</legend>
           <label for="name">Name</label>
-          <input
-            ngControl="name" #name="ngForm"
+          <input ngControl="name" #name="ngForm"
             id="name" type="text" class="form-control">
           <div
             *ngIf="!name.valid && name.touched"
@@ -18,8 +17,7 @@
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            ngControl="email" #email="ngForm"
+          <input ngControl="email" #email="ngForm"
             id="email" type="email" class="form-control">
 
           <div *ngIf="email.touched && email.errors">
@@ -38,30 +36,30 @@
 
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input id="phone" type="text" class="form-control">
+          <input ngControl="phone" id="phone" type="text" class="form-control">
         </div>
       </fieldset>
 
-      <fieldset ngcountrolgroup="address">
+      <fieldset ngControlGroup="address">
         <legend>Address</legend>
         <div class="form-group">
           <label for="street">Street</label>
-          <input id="street" type="text" class="form-control">
+          <input ngControl="street" id="street" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="suite">Suite</label>
-          <input id="suite" type="text" class="form-control">
+          <input ngControl="suite" id="suite" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="city">City</label>
-          <input id="city" type="text" class="form-control">
+          <input ngControl="city" id="city" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="zipCode">Zip Code</label>
-          <input id="zipCode" type="text" class="form-control">
+          <input ngControl="zipCode" id="zipCode" type="text" class="form-control">
         </div>
       </fieldset>
 

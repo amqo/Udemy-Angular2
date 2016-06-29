@@ -3,10 +3,12 @@ import { ControlGroup, Control, Validators, FormBuilder } from 'angular2/common'
 import { Router, CanDeactivate } from 'angular2/router';
 
 import { UsersNewValidators } from './usersNewValidators';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'users-new',
-  templateUrl: 'app/users-new.component.html'
+  templateUrl: 'app/users-new.component.html',
+  providers: [UsersService]
 })
 
 export class UsersNewComponent implements CanDeactivate {
@@ -14,12 +16,22 @@ export class UsersNewComponent implements CanDeactivate {
   form: ControlGroup;
   saving = false;
 
-  constructor(private _router: Router, formBuilder: FormBuilder) {
+  constructor(
+    private _usersService: UsersService,
+    private _router: Router,
+    formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.compose(
         [Validators.required, UsersNewValidators.mustBeAValidEmail]
-      )]
+      )],
+      phone: [],
+      address: formBuilder.group({
+        street: [],
+        suite: [],
+        city: [],
+        zipCode: []
+      })
     })
   }
 
@@ -30,9 +42,15 @@ export class UsersNewComponent implements CanDeactivate {
   }
 
   save() {
+    // Instead of using a flag, make the form clean
     this.saving = true;
-    console.log('Form saved');
-    this._router.navigate(['Users']);
+    this._usersService.postUser(this.form.value)
+      .subscribe(res => {
+        console.log('Result from post', res)
+      }, null, () => {
+        console.log('Post form completed, redirecting...');
+        this._router.navigate(['Users']);
+      });
   }
 
 }
