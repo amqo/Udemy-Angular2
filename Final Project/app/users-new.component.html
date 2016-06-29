@@ -21,23 +21,24 @@
           <input
             ngControl="email" #email="ngForm"
             id="email" type="email" class="form-control">
-          <div
-            *ngIf="!email.valid && email.touched"
-            class="alert alert-danger">
-              Email is required.
+
+          <div *ngIf="email.touched && email.errors">
+            <div
+              *ngIf="email.errors.required"
+              class="alert alert-danger">
+                Email is required.
+            </div>
+            <div
+              *ngIf="email.errors.mustBeAValidEmail && !email.errors.required"
+              class="alert alert-danger">
+                Email must have a valid format.
+            </div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input
-            ngControl="phone" #phone="ngForm"
-            id="phone" type="text" class="form-control">
-          <div
-            *ngIf="!phone.valid && phone.touched"
-            class="alert alert-danger">
-            Phone is required.
-          </div>
+          <input id="phone" type="text" class="form-control">
         </div>
       </fieldset>
 
@@ -45,50 +46,22 @@
         <legend>Address</legend>
         <div class="form-group">
           <label for="street">Street</label>
-          <input
-            ngControl="street" #street="ngForm"
-            id="street" type="text" class="form-control">
-          <div
-            *ngIf="!street.valid && street.touched"
-            class="alert alert-danger">
-            Street is required.
-          </div>
+          <input id="street" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="suite">Suite</label>
-          <input
-            ngControl="suite" #suite="ngForm"
-            id="suite" type="text" class="form-control">
-          <div
-            *ngIf="!suite.valid && suite.touched"
-            class="alert alert-danger">
-            Suite is required.
-          </div>
+          <input id="suite" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="city">City</label>
-          <input
-            ngControl="city" #city="ngForm"
-            id="city" type="text" class="form-control">
-          <div
-            *ngIf="!city.valid && city.touched"
-            class="alert alert-danger">
-            City is required.
-          </div>
+          <input id="city" type="text" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="zipCode">Zip Code</label>
-          <input
-            ngControl="zipCode" #zipCode="ngForm"
-            id="zipCode" type="text" class="form-control">
-          <div
-            *ngIf="!zipCode.valid && zipCode.touched"
-            class="alert alert-danger">
-            Zip Code is required.
-          </div>
+          <input id="zipCode" type="text" class="form-control">
         </div>
       </fieldset>
 

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', './usersNewValidators'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router'], functio
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, router_1;
+    var core_1, common_1, router_1, usersNewValidators_1;
     var UsersNewComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router'], functio
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (usersNewValidators_1_1) {
+                usersNewValidators_1 = usersNewValidators_1_1;
             }],
         execute: function() {
             let UsersNewComponent = class UsersNewComponent {
@@ -29,12 +32,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router'], functio
                     this._router = _router;
                     this.form = formBuilder.group({
                         name: ['', common_1.Validators.required],
-                        email: ['', common_1.Validators.required],
-                        phone: ['', common_1.Validators.required],
-                        street: ['', common_1.Validators.required],
-                        suite: ['', common_1.Validators.required],
-                        city: ['', common_1.Validators.required],
-                        zipCode: ['', common_1.Validators.required]
+                        email: ['', common_1.Validators.compose([common_1.Validators.required, usersNewValidators_1.UsersNewValidators.mustBeAValidEmail])]
                     });
                 }
                 save() {
