@@ -1,6 +1,8 @@
 import { Injectable } from 'angular2/core'
 import { Http } from 'angular2/http';
 
+import { User } from './user';
+
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -12,6 +14,11 @@ export class UsersService {
 
   getUsers() {
     return this._http.get(this._url)
+      .map(res => res.json());
+  }
+
+  getUser(userId) {
+    return this._http.get(`${this._url}/${userId}`)
       .map(res => res.json());
   }
 

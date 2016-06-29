@@ -11,23 +11,25 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var PostsComponent;
+    var NotFoundComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let PostsComponent = class PostsComponent {
+            let NotFoundComponent = class NotFoundComponent {
             };
-            PostsComponent = __decorate([
+            NotFoundComponent = __decorate([
                 core_1.Component({
-                    template: `<h1>Posts</h1>`
+                    template: `
+    <h1>Not Found</h1>
+  `
                 }), 
                 __metadata('design:paramtypes', [])
-            ], PostsComponent);
-            exports_1("PostsComponent", PostsComponent);
+            ], NotFoundComponent);
+            exports_1("NotFoundComponent", NotFoundComponent);
         }
     }
 });
-//# sourceMappingURL=posts.component.js.map
+//# sourceMappingURL=not-found.component.js.map
