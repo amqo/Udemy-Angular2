@@ -33,25 +33,27 @@ System.register(['angular2/core', 'angular2/router', './navbar.component', './ho
                 users_component_1 = users_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                }
-                AppComponent = __decorate([
-                    router_1.RouteConfig([
-                        { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                        { path: '/users', name: 'Users', component: users_component_1.UsersComponent },
-                        { path: '/posts', name: 'Posts', component: posts_component_1.PostsComponent },
-                        { path: '/*other', name: 'Other', redirectTo: ['Home'] }
-                    ]),
-                    core_1.Component({
-                        selector: 'my-app',
-                        template: "\n      <navbar></navbar>\n      <div class=\"container\">\n        <router-outlet></router-outlet>\n      </div>\n    ",
-                        directives: [navbar_component_1.NavBarComponent, router_1.ROUTER_DIRECTIVES]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
-            }());
+            let AppComponent = class AppComponent {
+            };
+            AppComponent = __decorate([
+                router_1.RouteConfig([
+                    { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                    { path: '/users', name: 'Users', component: users_component_1.UsersComponent },
+                    { path: '/posts', name: 'Posts', component: posts_component_1.PostsComponent },
+                    { path: '/*other', name: 'Other', redirectTo: ['Home'] }
+                ]),
+                core_1.Component({
+                    selector: 'my-app',
+                    template: `
+      <navbar></navbar>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    `,
+                    directives: [navbar_component_1.NavBarComponent, router_1.ROUTER_DIRECTIVES]
+                }), 
+                __metadata('design:paramtypes', [])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
     }
