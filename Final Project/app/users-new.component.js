@@ -30,12 +30,19 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
             let UsersNewComponent = class UsersNewComponent {
                 constructor(_router, formBuilder) {
                     this._router = _router;
+                    this.saving = false;
                     this.form = formBuilder.group({
                         name: ['', common_1.Validators.required],
                         email: ['', common_1.Validators.compose([common_1.Validators.required, usersNewValidators_1.UsersNewValidators.mustBeAValidEmail])]
                     });
                 }
+                routerCanDeactivate(next, previous) {
+                    if (this.form.dirty && !this.saving) {
+                        return confirm('You have unsaved changes. Are you sure you want to navigate away?');
+                    }
+                }
                 save() {
+                    this.saving = true;
                     console.log('Form saved');
                     this._router.navigate(['Users']);
                 }
