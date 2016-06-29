@@ -7,11 +7,11 @@ import { UsersService } from './users.service';
 import { User } from './user';
 
 @Component({
-  templateUrl: 'app/users-new.component.html',
+  templateUrl: 'app/users-form.component.html',
   providers: [UsersService]
 })
 
-export class UsersNewComponent implements CanDeactivate, OnInit {
+export class UsersFormComponent implements CanDeactivate, OnInit {
 
   form: ControlGroup;
   saving = false;
@@ -23,6 +23,7 @@ export class UsersNewComponent implements CanDeactivate, OnInit {
     private _routeParams: RouteParams,
     private _router: Router,
     formBuilder: FormBuilder) {
+
     this.form = formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.compose(

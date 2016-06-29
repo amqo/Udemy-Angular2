@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1, router_1, usersNewValidators_1, users_service_1, user_1;
-    var UsersNewComponent;
+    var UsersFormComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -33,7 +33,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
                 user_1 = user_1_1;
             }],
         execute: function() {
-            let UsersNewComponent = class UsersNewComponent {
+            let UsersFormComponent = class UsersFormComponent {
                 constructor(_usersService, _routeParams, _router, formBuilder) {
                     this._usersService = _usersService;
                     this._routeParams = _routeParams;
@@ -83,15 +83,15 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
                     });
                 }
             };
-            UsersNewComponent = __decorate([
+            UsersFormComponent = __decorate([
                 core_1.Component({
-                    templateUrl: 'app/users-new.component.html',
+                    templateUrl: 'app/users-form.component.html',
                     providers: [users_service_1.UsersService]
                 }), 
                 __metadata('design:paramtypes', [users_service_1.UsersService, router_1.RouteParams, router_1.Router, common_1.FormBuilder])
-            ], UsersNewComponent);
-            exports_1("UsersNewComponent", UsersNewComponent);
+            ], UsersFormComponent);
+            exports_1("UsersFormComponent", UsersFormComponent);
         }
     }
 });
-//# sourceMappingURL=users-new.component.js.map
+//# sourceMappingURL=users-form.component.js.map
