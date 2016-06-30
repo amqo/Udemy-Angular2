@@ -32,4 +32,9 @@ export class UsersService {
       .map(res => res.json());
   }
 
+  removeUser(userId) {
+    return this._http.delete(`${this._url}/${userId}`)
+      .map(res => res.json());
+  }
+
 }
