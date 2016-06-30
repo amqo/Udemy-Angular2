@@ -7,7 +7,7 @@ import { UsersService } from './users.service';
 import { User } from './user';
 
 @Component({
-  templateUrl: 'app/users-form.component.html',
+  templateUrl: 'app/users/users-form.component.html',
   providers: [UsersService]
 })
 

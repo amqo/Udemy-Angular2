@@ -97,7 +97,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
             };
             UsersFormComponent = __decorate([
                 core_1.Component({
-                    templateUrl: 'app/users-form.component.html',
+                    templateUrl: 'app/users/users-form.component.html',
                     providers: [users_service_1.UsersService]
                 }), 
                 __metadata('design:paramtypes', [users_service_1.UsersService, router_1.RouteParams, router_1.Router, common_1.FormBuilder])

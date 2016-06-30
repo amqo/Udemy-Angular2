@@ -3,7 +3,7 @@ import { OnChanges } from 'angular2/core';
 
 @Component({
   selector: 'pagination',
-  templateUrl: 'app/pagination.component.html'
+  templateUrl: 'app/shared/pagination.component.html'
 })
 
 export class PaginationComponent implements OnChanges {
