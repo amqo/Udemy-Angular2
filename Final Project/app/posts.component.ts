@@ -1,11 +1,12 @@
 import { Component, OnInit } from 'angular2/core';
 
 import { PostsService } from './posts.service';
+import { UsersService } from './users.service';
 import { SpinnerComponent } from './spinner.component';
 
 @Component({
   templateUrl: 'app/posts.component.html',
-  providers: [PostsService],
+  providers: [PostsService, UsersService],
   directives: [SpinnerComponent],
   styles: [`
         .posts li { cursor: default; }
@@ -23,17 +24,20 @@ import { SpinnerComponent } from './spinner.component';
 export class PostsComponent implements OnInit {
 
   posts = [];
-  currentPost;
-  isLoading = true;
-  isLoadingComments = true;
+  users = [];
 
-  constructor (private _postsService: PostsService) { }
+  currentPost;
+  isLoading;
+  isLoadingComments;
+
+  constructor (
+    private _postsService: PostsService,
+    private _usersService: UsersService
+  ) { }
 
   ngOnInit() {
-    this._postsService.getPosts()
-      .subscribe(
-        res => this.posts = res,
-        null, () => this.isLoading = false);
+    this.loadPosts();
+    this.loadUsers();
   }
 
   selectPost(post) {
@@ -44,4 +48,22 @@ export class PostsComponent implements OnInit {
       null, () => this.isLoadingComments = false);
   }
 
+  filterPosts(filter) {
+    this.currentPost = null;
+    this.posts = [];
+    this.loadPosts(filter);
+  }
+
+  private loadPosts(filter?) {
+    this.isLoading = true;
+    this._postsService.getPosts(filter)
+      .subscribe(
+        res => this.posts = res,
+        null, () => this.isLoading = false);
+  }
+
+  private loadUsers() {
+    this._usersService.getUsers()
+      .subscribe(res => this.users = res);
+  }
 }

@@ -35,7 +35,7 @@ export class UsersService {
       .map(res => res.json());
   }
 
-  getUserIdUrl(userId) {
+  private getUserIdUrl(userId) {
     return `${this._url}/${userId}`;
   }
 

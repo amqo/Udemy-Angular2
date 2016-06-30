@@ -27,8 +27,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     this._http = _http;
                     this._url = "http://jsonplaceholder.typicode.com/posts";
                 }
-                getPosts() {
-                    return this._http.get(this._url)
+                getPosts(filter) {
+                    var url = this._url;
+                    if (filter && filter.userId) {
+                        url = `${url}?userId=${filter.userId}`;
+                    }
+                    return this._http.get(url)
                         .map(res => res.json());
                 }
                 getPostComments(postId) {

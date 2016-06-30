@@ -2,6 +2,14 @@
 <div class="row">
 
   <div class="col-md-6">
+    <select class="form-control "#select
+      (change)="filterPosts({ userId: select.value })">
+      <option value="">Select a user...</option>
+      <option *ngFor="#user of users" value="{{ user.id }}">
+        {{ user.name }}
+      </option>
+    </select>
+    <br>
     <spinner [visible]="isLoading" ></spinner>
     <ul class="list-group posts">
       <li *ngFor="#post of posts"
@@ -23,7 +31,7 @@
 
         <hr/>
         <spinner [visible]="isLoadingComments" ></spinner>
-        
+
         <div *ngFor="#comment of currentPost.comments" class="media">
           <div class="media-left">
             <a href="mailto:{{ comment.email }}">
