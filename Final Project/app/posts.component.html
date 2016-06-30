@@ -10,9 +10,13 @@
       </option>
     </select>
     <br>
+    <pagination *ngIf="posts && posts.length > postsPerPage"
+      [pages]="posts.length" [page-size]="postsPerPage"
+      (page-changed)="showPage($event)">
+    </pagination>
     <spinner [visible]="isLoading" ></spinner>
     <ul class="list-group posts">
-      <li *ngFor="#post of posts"
+      <li *ngFor="#post of pagedPosts"
         (click)="selectPost(post)"
         [class.active]="currentPost == post"
         class="list-group-item">

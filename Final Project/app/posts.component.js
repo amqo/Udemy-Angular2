@@ -1,4 +1,4 @@
-System.register(['angular2/core', './posts.service', './users.service', './spinner.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './posts.service', './users.service', './spinner.component', './pagination.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './posts.service', './users.service', './spinn
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, posts_service_1, users_service_1, spinner_component_1;
+    var core_1, posts_service_1, users_service_1, spinner_component_1, pagination_component_1;
     var PostsComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', './posts.service', './users.service', './spinn
             },
             function (spinner_component_1_1) {
                 spinner_component_1 = spinner_component_1_1;
+            },
+            function (pagination_component_1_1) {
+                pagination_component_1 = pagination_component_1_1;
             }],
         execute: function() {
             let PostsComponent = class PostsComponent {
@@ -32,6 +35,8 @@ System.register(['angular2/core', './posts.service', './users.service', './spinn
                     this._postsService = _postsService;
                     this._usersService = _usersService;
                     this.posts = [];
+                    this.pagedPosts = [];
+                    this.postsPerPage = 12;
                     this.users = [];
                 }
                 ngOnInit() {
@@ -47,12 +52,27 @@ System.register(['angular2/core', './posts.service', './users.service', './spinn
                 filterPosts(filter) {
                     this.currentPost = null;
                     this.posts = [];
+                    this.pagedPosts = [];
                     this.loadPosts(filter);
                 }
                 loadPosts(filter) {
                     this.isLoading = true;
                     this._postsService.getPosts(filter)
-                        .subscribe(res => this.posts = res, null, () => this.isLoading = false);
+                        .subscribe(res => {
+                        this.posts = res;
+                        this.pagedPosts = this.getPostsInPage(1);
+                    }, null, () => this.isLoading = false);
+                }
+                showPage($event) {
+                    this.pagedPosts = this.getPostsInPage($event);
+                }
+                getPostsInPage(page) {
+                    let result = [];
+                    const firstPage = (page - 1) * this.postsPerPage;
+                    const lastPage = Math.min(firstPage + this.postsPerPage, this.posts.length);
+                    for (var i = firstPage; i < lastPage; ++i)
+                        result.push(this.posts[i]);
+                    return result;
                 }
                 loadUsers() {
                     this._usersService.getUsers()
@@ -63,7 +83,7 @@ System.register(['angular2/core', './posts.service', './users.service', './spinn
                 core_1.Component({
                     templateUrl: 'app/posts.component.html',
                     providers: [posts_service_1.PostsService, users_service_1.UsersService],
-                    directives: [spinner_component_1.SpinnerComponent],
+                    directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
                     styles: [`
         .posts li { cursor: default; }
         .posts li:hover { background: #ecf0f1 }

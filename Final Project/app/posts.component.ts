@@ -3,11 +3,12 @@ import { Component, OnInit } from 'angular2/core';
 import { PostsService } from './posts.service';
 import { UsersService } from './users.service';
 import { SpinnerComponent } from './spinner.component';
+import { PaginationComponent } from './pagination.component';
 
 @Component({
   templateUrl: 'app/posts.component.html',
   providers: [PostsService, UsersService],
-  directives: [SpinnerComponent],
+  directives: [SpinnerComponent, PaginationComponent],
   styles: [`
         .posts li { cursor: default; }
         .posts li:hover { background: #ecf0f1 }
@@ -24,6 +25,9 @@ import { SpinnerComponent } from './spinner.component';
 export class PostsComponent implements OnInit {
 
   posts = [];
+  pagedPosts = [];
+  postsPerPage = 12;
+
   users = [];
 
   currentPost;
@@ -51,6 +55,7 @@ export class PostsComponent implements OnInit {
   filterPosts(filter) {
     this.currentPost = null;
     this.posts = [];
+    this.pagedPosts = [];
     this.loadPosts(filter);
   }
 
@@ -58,8 +63,25 @@ export class PostsComponent implements OnInit {
     this.isLoading = true;
     this._postsService.getPosts(filter)
       .subscribe(
-        res => this.posts = res,
+        res => {
+          this.posts = res;
+          this.pagedPosts = this.getPostsInPage(1);
+        },
         null, () => this.isLoading = false);
+  }
+
+  showPage($event) {
+    this.pagedPosts = this.getPostsInPage($event);
+  }
+
+  private getPostsInPage(page) {
+    let result = [];
+    const firstPage = (page - 1) * this.postsPerPage;
+    const lastPage = Math.min(firstPage + this.postsPerPage, this.posts.length);
+    for (var i = firstPage; i < lastPage; ++i)
+      result.push(this.posts[i]);
+
+    return result;
   }
 
   private loadUsers() {
