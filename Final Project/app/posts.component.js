@@ -25,10 +25,13 @@ System.register(['angular2/core', './posts.service'], function(exports_1, contex
                 constructor(_postsService) {
                     this._postsService = _postsService;
                     this.posts = [];
+                    this.isLoading = true;
                 }
                 ngOnInit() {
                     this._postsService.getPosts()
-                        .subscribe(res => this.posts = res);
+                        .subscribe(res => this.posts = res, null, () => {
+                        this.isLoading = false;
+                    });
                 }
             };
             PostsComponent = __decorate([
