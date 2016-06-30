@@ -1,11 +1,7 @@
 <h1>Posts</h1>
-<i
-  *ngIf="isLoading"
-  class="fa fa-spinner fa-spin fa-3x"
-  aria-hidden="true">
-</i>
 <div class="row">
   <div class="col-md-6">
+    <spinner [visible]="isLoading" ></spinner>
     <ul class="list-group">
       <li *ngFor="#post of posts" class="list-group-item">
         {{ post.title }}
