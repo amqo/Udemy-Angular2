@@ -25,6 +25,7 @@ export class PostsComponent implements OnInit {
   posts = [];
   currentPost;
   isLoading = true;
+  isLoadingComments = true;
 
   constructor (private _postsService: PostsService) { }
 
@@ -32,15 +33,15 @@ export class PostsComponent implements OnInit {
     this._postsService.getPosts()
       .subscribe(
         res => this.posts = res,
-        null, () => {
-          this.isLoading = false;
-        });
+        null, () => this.isLoading = false);
   }
 
   selectPost(post) {
+    this.isLoadingComments = true;
     this.currentPost = post;
     this._postsService.getPostComments(post.id)
-      .subscribe(res => this.currentPost.comments = res);
+      .subscribe(res => this.currentPost.comments = res,
+      null, () => this.isLoadingComments = false);
   }
 
 }

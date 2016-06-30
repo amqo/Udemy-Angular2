@@ -29,17 +29,17 @@ System.register(['angular2/core', './posts.service', './spinner.component'], fun
                     this._postsService = _postsService;
                     this.posts = [];
                     this.isLoading = true;
+                    this.isLoadingComments = true;
                 }
                 ngOnInit() {
                     this._postsService.getPosts()
-                        .subscribe(res => this.posts = res, null, () => {
-                        this.isLoading = false;
-                    });
+                        .subscribe(res => this.posts = res, null, () => this.isLoading = false);
                 }
                 selectPost(post) {
+                    this.isLoadingComments = true;
                     this.currentPost = post;
                     this._postsService.getPostComments(post.id)
-                        .subscribe(res => this.currentPost.comments = res);
+                        .subscribe(res => this.currentPost.comments = res, null, () => this.isLoadingComments = false);
                 }
             };
             PostsComponent = __decorate([
