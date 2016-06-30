@@ -1,8 +1,6 @@
 import { Injectable } from 'angular2/core'
 import { Http } from 'angular2/http';
 
-import { User } from './user';
-
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -18,7 +16,7 @@ export class UsersService {
   }
 
   getUser(userId) {
-    return this._http.get(`${this._url}/${userId}`)
+    return this._http.get(this.getUserIdUrl(userId))
       .map(res => res.json());
   }
 
@@ -28,13 +26,17 @@ export class UsersService {
   }
 
   updateUser(user) {
-    return this._http.put(`${this._url}/${user.id}`, JSON.stringify(user))
+    return this._http.put(this.getUserIdUrl(user.id), JSON.stringify(user))
       .map(res => res.json());
   }
 
   removeUser(userId) {
-    return this._http.delete(`${this._url}/${userId}`)
+    return this._http.delete(this.getUserIdUrl(userId))
       .map(res => res.json());
+  }
+
+  getUserIdUrl(userId) {
+    return `${this._url}/${userId}`;
   }
 
 }

@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var UsersService;
+    var PostsService;
     return {
         setters:[
             function (core_1_1) {
@@ -22,41 +22,22 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            let UsersService = class UsersService {
+            let PostsService = class PostsService {
                 constructor(_http) {
                     this._http = _http;
-                    this._url = "http://jsonplaceholder.typicode.com/users";
+                    this._url = "http://jsonplaceholder.typicode.com/posts";
                 }
-                getUsers() {
+                getPosts() {
                     return this._http.get(this._url)
                         .map(res => res.json());
                 }
-                getUser(userId) {
-                    return this._http.get(this.getUserIdUrl(userId))
-                        .map(res => res.json());
-                }
-                addUser(user) {
-                    return this._http.post(this._url, JSON.stringify(user))
-                        .map(res => res.json());
-                }
-                updateUser(user) {
-                    return this._http.put(this.getUserIdUrl(user.id), JSON.stringify(user))
-                        .map(res => res.json());
-                }
-                removeUser(userId) {
-                    return this._http.delete(this.getUserIdUrl(userId))
-                        .map(res => res.json());
-                }
-                getUserIdUrl(userId) {
-                    return `${this._url}/${userId}`;
-                }
             };
-            UsersService = __decorate([
+            PostsService = __decorate([
                 core_1.Injectable(), 
                 __metadata('design:paramtypes', [http_1.Http])
-            ], UsersService);
-            exports_1("UsersService", UsersService);
+            ], PostsService);
+            exports_1("PostsService", PostsService);
         }
     }
 });
-//# sourceMappingURL=users.service.js.map
+//# sourceMappingURL=posts.service.js.map
