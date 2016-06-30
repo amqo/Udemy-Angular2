@@ -22,8 +22,13 @@ export class UsersService {
       .map(res => res.json());
   }
 
-  postUser(user) {
+  addUser(user) {
     return this._http.post(this._url, JSON.stringify(user))
+      .map(res => res.json());
+  }
+
+  updateUser(user) {
+    return this._http.put(`${this._url}/${user.id}`, JSON.stringify(user))
       .map(res => res.json());
   }
 

@@ -35,8 +35,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     return this._http.get(`${this._url}/${userId}`)
                         .map(res => res.json());
                 }
-                postUser(user) {
+                addUser(user) {
                     return this._http.post(this._url, JSON.stringify(user))
+                        .map(res => res.json());
+                }
+                updateUser(user) {
+                    return this._http.put(`${this._url}/${user.id}`, JSON.stringify(user))
                         .map(res => res.json());
                 }
             };

@@ -71,16 +71,28 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
                     }
                 }
                 save() {
-                    this._usersService.postUser(this.form.value)
-                        .subscribe(res => {
-                        // Instead of using a flag, make the form clean
-                        // this.form.markAsPristine();
-                        this.saving = true;
-                        console.log('Result from post', res);
-                    }, null, () => {
-                        console.log('Post form completed, redirecting...');
-                        this._router.navigate(['Users']);
-                    });
+                    if (this.user.id) {
+                        this._usersService.updateUser(this.user)
+                            .subscribe(res => {
+                            this.saving = true;
+                            console.log('Result from edit', res);
+                        }, null, () => {
+                            console.log('Edit form completed, redirecting...');
+                            this._router.navigate(['Users']);
+                        });
+                    }
+                    else {
+                        this._usersService.addUser(this.user)
+                            .subscribe(res => {
+                            // Instead of using a flag, make the form clean
+                            // this.form.markAsPristine();
+                            this.saving = true;
+                            console.log('Result from post new', res);
+                        }, null, () => {
+                            console.log('Post new form completed, redirecting...');
+                            this._router.navigate(['Users']);
+                        });
+                    }
                 }
             };
             UsersFormComponent = __decorate([
