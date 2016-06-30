@@ -11,7 +11,7 @@
         {{ post.title }}
       </li>
     </ul>
-  </div>
+  </div> <!-- master div -->
 
   <div class="col-md-6">
     <div *ngIf="currentPost" class="panel panel-default">
@@ -20,8 +20,26 @@
       </div>
       <div class="panel-body">
         <p>{{ currentPost.body }}</p>
-      </div>
-    </div>
-  </div>
+
+        <hr/>
+
+        <div *ngFor="#comment of currentPost.comments" class="media">
+          <div class="media-left">
+            <a href="mailto:{{ comment.email }}">
+              <img class="media-object thumbnail"
+                src="http://lorempixel.com/80/80/people?random={{ comment.id }}"
+                alt="Send E-Mail">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{ comment.name }}</h4>
+            {{ comment.body }}
+          </div>
+        </div> <!-- selected post comments -->
+
+      </div> <!-- pannel-body -->
+    </div> <!-- main pannel -->
+
+  </div> <!-- detail div -->
 
 </div>

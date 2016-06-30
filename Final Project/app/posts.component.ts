@@ -9,7 +9,7 @@ import { SpinnerComponent } from './spinner.component';
   directives: [SpinnerComponent],
   styles: [`
         .posts li { cursor: default; }
-        .posts li:hover { background: #ecf0f1; }
+        .posts li:hover { background: #ecf0f1 }
         .list-group-item.active,
         .list-group-item.active:hover,
         .list-group-item.active:focus {
@@ -24,7 +24,6 @@ export class PostsComponent implements OnInit {
 
   posts = [];
   currentPost;
-
   isLoading = true;
 
   constructor (private _postsService: PostsService) { }
@@ -40,6 +39,8 @@ export class PostsComponent implements OnInit {
 
   selectPost(post) {
     this.currentPost = post;
+    this._postsService.getPostComments(post.id)
+      .subscribe(res => this.currentPost.comments = res);
   }
 
 }

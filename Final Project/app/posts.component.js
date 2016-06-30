@@ -38,6 +38,8 @@ System.register(['angular2/core', './posts.service', './spinner.component'], fun
                 }
                 selectPost(post) {
                     this.currentPost = post;
+                    this._postsService.getPostComments(post.id)
+                        .subscribe(res => this.currentPost.comments = res);
                 }
             };
             PostsComponent = __decorate([
@@ -47,7 +49,7 @@ System.register(['angular2/core', './posts.service', './spinner.component'], fun
                     directives: [spinner_component_1.SpinnerComponent],
                     styles: [`
         .posts li { cursor: default; }
-        .posts li:hover { background: #ecf0f1; }
+        .posts li:hover { background: #ecf0f1 }
         .list-group-item.active,
         .list-group-item.active:hover,
         .list-group-item.active:focus {
