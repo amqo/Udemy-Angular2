@@ -65,24 +65,27 @@ export class PostsComponent implements OnInit {
       .subscribe(
         res => {
           this.posts = res;
-          this.pagedPosts = this.getPostsInPage(1);
+          // this.pagedPosts = this.getPostsInPage(1);
+          this.pagedPosts = _.take(this.posts, this.postsPerPage);
         },
         null, () => this.isLoading = false);
   }
 
-  showPage($event) {
-    this.pagedPosts = this.getPostsInPage($event);
-  }
-
-  private getPostsInPage(page) {
-    let result = [];
+  showPage(page) {
+    // this.pagedPosts = this.getPostsInPage($event);
     const firstPage = (page - 1) * this.postsPerPage;
-    const lastPage = Math.min(firstPage + this.postsPerPage, this.posts.length);
-    for (var i = firstPage; i < lastPage; ++i)
-      result.push(this.posts[i]);
-
-    return result;
+    this.pagedPosts = _.take(_.rest(this.posts, firstPage), this.postsPerPage);
   }
+
+  // private getPostsInPage(page) {
+  //   let result = [];
+  //   const firstPage = (page - 1) * this.postsPerPage;
+  //   const lastPage = Math.min(firstPage + this.postsPerPage, this.posts.length);
+  //   for (var i = firstPage; i < lastPage; ++i)
+  //     result.push(this.posts[i]);
+  //
+  //   return result;
+  // }
 
   private loadUsers() {
     this._usersService.getUsers()
