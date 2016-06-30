@@ -7,7 +7,7 @@ import { OnChanges } from 'angular2/core';
 })
 
 export class PaginationComponent implements OnChanges {
-  @Input('pages') totalPages = 0;
+  @Input('items') totalItems = 0;
   @Input('page-size') pageSize = 10;
 
   @Output('page-changed') pageChanged = new EventEmitter();
@@ -32,7 +32,7 @@ export class PaginationComponent implements OnChanges {
 
   ngOnChanges() {
     this.currentPage = 1;
-    var pagesCount = Math.ceil(this.totalPages / this.pageSize);
+    var pagesCount = Math.ceil(this.totalItems / this.pageSize);
     this.pages = [];
     for (var i = 1; i <= pagesCount; i++) {
       this.pages.push(i);

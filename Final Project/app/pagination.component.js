@@ -20,7 +20,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             let PaginationComponent = class PaginationComponent {
                 constructor() {
-                    this.totalPages = 0;
+                    this.totalItems = 0;
                     this.pageSize = 10;
                     this.pageChanged = new core_1.EventEmitter();
                 }
@@ -40,7 +40,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
                 ngOnChanges() {
                     this.currentPage = 1;
-                    var pagesCount = Math.ceil(this.totalPages / this.pageSize);
+                    var pagesCount = Math.ceil(this.totalItems / this.pageSize);
                     this.pages = [];
                     for (var i = 1; i <= pagesCount; i++) {
                         this.pages.push(i);
@@ -48,9 +48,9 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
             };
             __decorate([
-                core_1.Input('pages'), 
+                core_1.Input('items'), 
                 __metadata('design:type', Object)
-            ], PaginationComponent.prototype, "totalPages", void 0);
+            ], PaginationComponent.prototype, "totalItems", void 0);
             __decorate([
                 core_1.Input('page-size'), 
                 __metadata('design:type', Object)
