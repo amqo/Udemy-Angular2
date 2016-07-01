@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -22,28 +22,29 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            let PostsService = class PostsService {
-                constructor(_http) {
+            PostsService = (function () {
+                function PostsService(_http) {
                     this._http = _http;
                     this._url = "http://jsonplaceholder.typicode.com/posts";
                 }
-                getPosts(filter) {
+                PostsService.prototype.getPosts = function (filter) {
                     var url = this._url;
                     if (filter && filter.userId) {
-                        url = `${url}?userId=${filter.userId}`;
+                        url = url + "?userId=" + filter.userId;
                     }
                     return this._http.get(url)
-                        .map(res => res.json());
-                }
-                getPostComments(postId) {
-                    return this._http.get(`${this._url}/${postId}/comments`)
-                        .map(res => res.json());
-                }
-            };
-            PostsService = __decorate([
-                core_1.Injectable(), 
-                __metadata('design:paramtypes', [http_1.Http])
-            ], PostsService);
+                        .map(function (res) { return res.json(); });
+                };
+                PostsService.prototype.getPostComments = function (postId) {
+                    return this._http.get(this._url + "/" + postId + "/comments")
+                        .map(function (res) { return res.json(); });
+                };
+                PostsService = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [http_1.Http])
+                ], PostsService);
+                return PostsService;
+            }());
             exports_1("PostsService", PostsService);
         }
     }

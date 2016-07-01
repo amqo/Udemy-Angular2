@@ -5,7 +5,7 @@
     <select class="form-control "#select
       (change)="filterPosts({ userId: select.value })">
       <option value="">Select a user...</option>
-      <option *ngFor="#user of users" value="{{ user.id }}">
+      <option *ngFor="let user of users" value="{{ user.id }}">
         {{ user.name }}
       </option>
     </select>
@@ -16,7 +16,7 @@
     </pagination>
     <spinner [visible]="isLoading" ></spinner>
     <ul class="list-group posts">
-      <li *ngFor="#post of pagedPosts"
+      <li *ngFor="let post of pagedPosts"
         (click)="selectPost(post)"
         [class.active]="currentPost == post"
         class="list-group-item">
@@ -36,7 +36,7 @@
         <hr/>
         <spinner [visible]="isLoadingComments" ></spinner>
 
-        <div *ngFor="#comment of currentPost.comments" class="media">
+        <div *ngFor="let comment of currentPost.comments" class="media">
           <div class="media-left">
             <a href="mailto:{{ comment.email }}">
               <img class="media-object thumbnail"

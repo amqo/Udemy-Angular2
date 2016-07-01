@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -18,54 +18,55 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let PaginationComponent = class PaginationComponent {
-                constructor() {
+            PaginationComponent = (function () {
+                function PaginationComponent() {
                     this.totalItems = 0;
                     this.pageSize = 10;
                     this.pageChanged = new core_1.EventEmitter();
                 }
-                changePage(page) {
+                PaginationComponent.prototype.changePage = function (page) {
                     this.currentPage = page;
                     this.pageChanged.emit(page);
-                }
-                previous() {
+                };
+                PaginationComponent.prototype.previous = function () {
                     if (this.currentPage == 1)
                         return;
                     this.pageChanged.emit(--this.currentPage);
-                }
-                next() {
+                };
+                PaginationComponent.prototype.next = function () {
                     if (this.currentPage == this.pages.length)
                         return;
                     this.pageChanged.emit(++this.currentPage);
-                }
-                ngOnChanges() {
+                };
+                PaginationComponent.prototype.ngOnChanges = function () {
                     this.currentPage = 1;
                     var pagesCount = Math.ceil(this.totalItems / this.pageSize);
                     this.pages = [];
                     for (var i = 1; i <= pagesCount; i++) {
                         this.pages.push(i);
                     }
-                }
-            };
-            __decorate([
-                core_1.Input('items'), 
-                __metadata('design:type', Object)
-            ], PaginationComponent.prototype, "totalItems", void 0);
-            __decorate([
-                core_1.Input('page-size'), 
-                __metadata('design:type', Object)
-            ], PaginationComponent.prototype, "pageSize", void 0);
-            __decorate([
-                core_1.Output('page-changed'), 
-                __metadata('design:type', Object)
-            ], PaginationComponent.prototype, "pageChanged", void 0);
-            PaginationComponent = __decorate([
-                core_1.Component({
-                    selector: 'pagination',
-                    templateUrl: 'app/shared/pagination.component.html'
-                }), 
-                __metadata('design:paramtypes', [])
-            ], PaginationComponent);
+                };
+                __decorate([
+                    core_1.Input('items'), 
+                    __metadata('design:type', Object)
+                ], PaginationComponent.prototype, "totalItems", void 0);
+                __decorate([
+                    core_1.Input('page-size'), 
+                    __metadata('design:type', Object)
+                ], PaginationComponent.prototype, "pageSize", void 0);
+                __decorate([
+                    core_1.Output('page-changed'), 
+                    __metadata('design:type', Object)
+                ], PaginationComponent.prototype, "pageChanged", void 0);
+                PaginationComponent = __decorate([
+                    core_1.Component({
+                        selector: 'pagination',
+                        templateUrl: 'app/shared/pagination.component.html'
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], PaginationComponent);
+                return PaginationComponent;
+            }());
             exports_1("PaginationComponent", PaginationComponent);
         }
     }

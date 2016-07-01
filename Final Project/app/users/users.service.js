@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -22,39 +22,40 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            let UsersService = class UsersService {
-                constructor(_http) {
+            UsersService = (function () {
+                function UsersService(_http) {
                     this._http = _http;
                     this._url = "http://jsonplaceholder.typicode.com/users";
                 }
-                getUsers() {
+                UsersService.prototype.getUsers = function () {
                     return this._http.get(this._url)
-                        .map(res => res.json());
-                }
-                getUser(userId) {
+                        .map(function (res) { return res.json(); });
+                };
+                UsersService.prototype.getUser = function (userId) {
                     return this._http.get(this.getUserIdUrl(userId))
-                        .map(res => res.json());
-                }
-                addUser(user) {
+                        .map(function (res) { return res.json(); });
+                };
+                UsersService.prototype.addUser = function (user) {
                     return this._http.post(this._url, JSON.stringify(user))
-                        .map(res => res.json());
-                }
-                updateUser(user) {
+                        .map(function (res) { return res.json(); });
+                };
+                UsersService.prototype.updateUser = function (user) {
                     return this._http.put(this.getUserIdUrl(user.id), JSON.stringify(user))
-                        .map(res => res.json());
-                }
-                removeUser(userId) {
+                        .map(function (res) { return res.json(); });
+                };
+                UsersService.prototype.removeUser = function (userId) {
                     return this._http.delete(this.getUserIdUrl(userId))
-                        .map(res => res.json());
-                }
-                getUserIdUrl(userId) {
-                    return `${this._url}/${userId}`;
-                }
-            };
-            UsersService = __decorate([
-                core_1.Injectable(), 
-                __metadata('design:paramtypes', [http_1.Http])
-            ], UsersService);
+                        .map(function (res) { return res.json(); });
+                };
+                UsersService.prototype.getUserIdUrl = function (userId) {
+                    return this._url + "/" + userId;
+                };
+                UsersService = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [http_1.Http])
+                ], UsersService);
+                return UsersService;
+            }());
             exports_1("UsersService", UsersService);
         }
     }

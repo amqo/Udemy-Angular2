@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -18,28 +18,23 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let SpinnerComponent = class SpinnerComponent {
-                constructor() {
+            SpinnerComponent = (function () {
+                function SpinnerComponent() {
                     this.visible = true;
                 }
-            };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', Object)
-            ], SpinnerComponent.prototype, "visible", void 0);
-            SpinnerComponent = __decorate([
-                core_1.Component({
-                    selector: 'spinner',
-                    template: `
-    <i
-      *ngIf="visible"
-      class="fa fa-spinner fa-spin fa-3x"
-      aria-hidden="true">
-    </i>
-  `
-                }), 
-                __metadata('design:paramtypes', [])
-            ], SpinnerComponent);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], SpinnerComponent.prototype, "visible", void 0);
+                SpinnerComponent = __decorate([
+                    core_1.Component({
+                        selector: 'spinner',
+                        template: "\n    <i\n      *ngIf=\"visible\"\n      class=\"fa fa-spinner fa-spin fa-3x\"\n      aria-hidden=\"true\">\n    </i>\n  "
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], SpinnerComponent);
+                return SpinnerComponent;
+            }());
             exports_1("SpinnerComponent", SpinnerComponent);
         }
     }

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/router', './usersNewValidators', './users.service', './user'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/common', '@angular/router-deprecated', './usersNewValidators', './users.service', './user'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, router_1, usersNewValidators_1, users_service_1, user_1;
+    var core_1, common_1, router_deprecated_1, usersNewValidators_1, users_service_1, user_1;
     var UsersFormComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
             function (common_1_1) {
                 common_1 = common_1_1;
             },
-            function (router_1_1) {
-                router_1 = router_1_1;
+            function (router_deprecated_1_1) {
+                router_deprecated_1 = router_deprecated_1_1;
             },
             function (usersNewValidators_1_1) {
                 usersNewValidators_1 = usersNewValidators_1_1;
@@ -33,8 +33,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
                 user_1 = user_1_1;
             }],
         execute: function() {
-            let UsersFormComponent = class UsersFormComponent {
-                constructor(_usersService, _routeParams, _router, formBuilder) {
+            UsersFormComponent = (function () {
+                function UsersFormComponent(_usersService, _routeParams, _router, formBuilder) {
                     this._usersService = _usersService;
                     this._routeParams = _routeParams;
                     this._router = _router;
@@ -53,55 +53,58 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './users
                         })
                     });
                 }
-                ngOnInit() {
-                    let userId = this._routeParams.get('id');
+                UsersFormComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    var userId = this._routeParams.get('id');
                     this.title = userId ? 'Edit User' : 'New User';
                     if (!userId)
                         return;
                     this._usersService.getUser(userId)
-                        .subscribe(user => this.user = user, response => {
+                        .subscribe(function (user) { return _this.user = user; }, function (response) {
                         if (response.status == 404) {
-                            this._router.navigate(['NotFound']);
+                            _this._router.navigate(['NotFound']);
                         }
                     });
-                }
-                routerCanDeactivate(next, previous) {
+                };
+                UsersFormComponent.prototype.routerCanDeactivate = function (next, previous) {
                     if (this.form.dirty && !this.saving) {
                         return confirm('You have unsaved changes. Are you sure you want to navigate away?');
                     }
-                }
-                save() {
+                };
+                UsersFormComponent.prototype.save = function () {
+                    var _this = this;
                     if (this.user.id) {
                         this._usersService.updateUser(this.user)
-                            .subscribe(res => {
-                            this.saving = true;
+                            .subscribe(function (res) {
+                            _this.saving = true;
                             console.log('Result from edit', res);
-                        }, null, () => {
+                        }, null, function () {
                             console.log('Edit form completed, redirecting...');
-                            this._router.navigate(['Users']);
+                            _this._router.navigate(['Users']);
                         });
                     }
                     else {
                         this._usersService.addUser(this.user)
-                            .subscribe(res => {
+                            .subscribe(function (res) {
                             // Instead of using a flag, make the form clean
                             // this.form.markAsPristine();
-                            this.saving = true;
+                            _this.saving = true;
                             console.log('Result from post new', res);
-                        }, null, () => {
+                        }, null, function () {
                             console.log('Post new form completed, redirecting...');
-                            this._router.navigate(['Users']);
+                            _this._router.navigate(['Users']);
                         });
                     }
-                }
-            };
-            UsersFormComponent = __decorate([
-                core_1.Component({
-                    templateUrl: 'app/users/users-form.component.html',
-                    providers: [users_service_1.UsersService]
-                }), 
-                __metadata('design:paramtypes', [users_service_1.UsersService, router_1.RouteParams, router_1.Router, common_1.FormBuilder])
-            ], UsersFormComponent);
+                };
+                UsersFormComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/users/users-form.component.html',
+                        providers: [users_service_1.UsersService]
+                    }), 
+                    __metadata('design:paramtypes', [users_service_1.UsersService, router_deprecated_1.RouteParams, router_deprecated_1.Router, common_1.FormBuilder])
+                ], UsersFormComponent);
+                return UsersFormComponent;
+            }());
             exports_1("UsersFormComponent", UsersFormComponent);
         }
     }

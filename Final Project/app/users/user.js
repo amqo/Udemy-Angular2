@@ -5,14 +5,18 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
-            class Address {
-            }
+            Address = (function () {
+                function Address() {
+                }
+                return Address;
+            }());
             exports_1("Address", Address);
-            class User {
-                constructor() {
+            User = (function () {
+                function User() {
                     this.address = new Address();
                 }
-            }
+                return User;
+            }());
             exports_1("User", User);
         }
     }

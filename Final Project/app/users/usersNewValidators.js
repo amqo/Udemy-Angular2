@@ -5,15 +5,18 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
-            class UsersNewValidators {
-                static mustBeAValidEmail(control) {
+            UsersNewValidators = (function () {
+                function UsersNewValidators() {
+                }
+                UsersNewValidators.mustBeAValidEmail = function (control) {
                     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                    let valid = re.test(control.value);
+                    var valid = re.test(control.value);
                     if (valid)
                         return null;
                     return { mustBeAValidEmail: true };
-                }
-            }
+                };
+                return UsersNewValidators;
+            }());
             exports_1("UsersNewValidators", UsersNewValidators);
         }
     }

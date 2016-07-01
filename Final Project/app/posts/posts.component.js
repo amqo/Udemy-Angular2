@@ -1,4 +1,4 @@
-System.register(['angular2/core', './posts.service', '../users/users.service', '../shared/spinner.component', '../shared/pagination.component'], function(exports_1, context_1) {
+System.register(['@angular/core', './posts.service', '../users/users.service', '../shared/spinner.component', '../shared/pagination.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -30,8 +30,8 @@ System.register(['angular2/core', './posts.service', '../users/users.service', '
                 pagination_component_1 = pagination_component_1_1;
             }],
         execute: function() {
-            let PostsComponent = class PostsComponent {
-                constructor(_postsService, _usersService) {
+            PostsComponent = (function () {
+                function PostsComponent(_postsService, _usersService) {
                     this._postsService = _postsService;
                     this._usersService = _usersService;
                     this.posts = [];
@@ -39,36 +39,38 @@ System.register(['angular2/core', './posts.service', '../users/users.service', '
                     this.postsPerPage = 12;
                     this.users = [];
                 }
-                ngOnInit() {
+                PostsComponent.prototype.ngOnInit = function () {
                     this.loadPosts();
                     this.loadUsers();
-                }
-                selectPost(post) {
+                };
+                PostsComponent.prototype.selectPost = function (post) {
+                    var _this = this;
                     this.isLoadingComments = true;
                     this.currentPost = post;
                     this._postsService.getPostComments(post.id)
-                        .subscribe(res => this.currentPost.comments = res, null, () => this.isLoadingComments = false);
-                }
-                filterPosts(filter) {
+                        .subscribe(function (res) { return _this.currentPost.comments = res; }, null, function () { return _this.isLoadingComments = false; });
+                };
+                PostsComponent.prototype.filterPosts = function (filter) {
                     this.currentPost = null;
                     this.posts = [];
                     this.pagedPosts = [];
                     this.loadPosts(filter);
-                }
-                loadPosts(filter) {
+                };
+                PostsComponent.prototype.loadPosts = function (filter) {
+                    var _this = this;
                     this.isLoading = true;
                     this._postsService.getPosts(filter)
-                        .subscribe(res => {
-                        this.posts = res;
+                        .subscribe(function (res) {
+                        _this.posts = res;
                         // this.pagedPosts = this.getPostsInPage(1);
-                        this.pagedPosts = _.take(this.posts, this.postsPerPage);
-                    }, null, () => this.isLoading = false);
-                }
-                showPage(page) {
+                        _this.pagedPosts = _.take(_this.posts, _this.postsPerPage);
+                    }, null, function () { return _this.isLoading = false; });
+                };
+                PostsComponent.prototype.showPage = function (page) {
                     // this.pagedPosts = this.getPostsInPage($event);
-                    const firstPage = (page - 1) * this.postsPerPage;
+                    var firstPage = (page - 1) * this.postsPerPage;
                     this.pagedPosts = _.take(_.rest(this.posts, firstPage), this.postsPerPage);
-                }
+                };
                 // private getPostsInPage(page) {
                 //   let result = [];
                 //   const firstPage = (page - 1) * this.postsPerPage;
@@ -78,30 +80,22 @@ System.register(['angular2/core', './posts.service', '../users/users.service', '
                 //
                 //   return result;
                 // }
-                loadUsers() {
+                PostsComponent.prototype.loadUsers = function () {
+                    var _this = this;
                     this._usersService.getUsers()
-                        .subscribe(res => this.users = res);
-                }
-            };
-            PostsComponent = __decorate([
-                core_1.Component({
-                    templateUrl: 'app/posts/posts.component.html',
-                    providers: [posts_service_1.PostsService, users_service_1.UsersService],
-                    directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
-                    styles: [`
-        .posts li { cursor: default; }
-        .posts li:hover { background: #ecf0f1 }
-        .list-group-item.active,
-        .list-group-item.active:hover,
-        .list-group-item.active:focus {
-            background-color: #ecf0f1;
-            border-color: #ecf0f1;
-            color: #2c3e50;
-        }
-    `],
-                }), 
-                __metadata('design:paramtypes', [posts_service_1.PostsService, users_service_1.UsersService])
-            ], PostsComponent);
+                        .subscribe(function (res) { return _this.users = res; });
+                };
+                PostsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/posts/posts.component.html',
+                        providers: [posts_service_1.PostsService, users_service_1.UsersService],
+                        directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
+                        styles: ["\n        .posts li { cursor: default; }\n        .posts li:hover { background: #ecf0f1 }\n        .list-group-item.active,\n        .list-group-item.active:hover,\n        .list-group-item.active:focus {\n            background-color: #ecf0f1;\n            border-color: #ecf0f1;\n            color: #2c3e50;\n        }\n    "],
+                    }), 
+                    __metadata('design:paramtypes', [posts_service_1.PostsService, users_service_1.UsersService])
+                ], PostsComponent);
+                return PostsComponent;
+            }());
             exports_1("PostsComponent", PostsComponent);
         }
     }
