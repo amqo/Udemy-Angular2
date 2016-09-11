@@ -16,6 +16,7 @@ var not_found_component_1 = require('./not-found.component');
 var messages_module_1 = require('./messages/messages.module');
 var photos_module_1 = require('./photos/photos.module');
 var app_routing_1 = require('./app.routing');
+var photos_routing_1 = require('./photos/photos.routing');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,7 +26,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 messages_module_1.MessagesModule,
                 photos_module_1.PhotosModule,
-                app_routing_1.routing
+                photos_routing_1.photosRouting, app_routing_1.routing
             ],
             declarations: [
                 app_component_1.AppComponent,
