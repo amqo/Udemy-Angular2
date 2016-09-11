@@ -12,12 +12,13 @@ var core_1 = require('@angular/core');
 var messages_service_1 = require('./messages.service');
 var MessagesComponent = (function () {
     function MessagesComponent(service) {
+        this.title = "Title";
         this.messages = service.getMessages();
     }
     MessagesComponent = __decorate([
         core_1.Component({
             selector: 'messages',
-            template: "\n      <h1>Messages</h1>\n      <ul>\n        <li *ngFor=\"let m of messages\">{{ m }}</li>\n      </ul>\n    "
+            template: "\n      <h1>Messages</h1>\n      <input type=\"text\" [(ngModel)]=\"title\" />\n      <ul>\n        <li *ngFor=\"let m of messages\">{{ m }}</li>\n      </ul>\n    "
         }), 
         __metadata('design:paramtypes', [messages_service_1.MessagesService])
     ], MessagesComponent);

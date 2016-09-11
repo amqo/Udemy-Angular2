@@ -6,6 +6,7 @@ import { MessagesService } from './messages.service';
     selector: 'messages',
     template: `
       <h1>Messages</h1>
+      <input type="text" [(ngModel)]="title" />
       <ul>
         <li *ngFor="let m of messages">{{ m }}</li>
       </ul>
@@ -13,6 +14,8 @@ import { MessagesService } from './messages.service';
 })
 export class MessagesComponent {
   messages;
+
+  title="Title";
 
   constructor(service: MessagesService) {
     this.messages = service.getMessages();
