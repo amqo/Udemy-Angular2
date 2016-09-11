@@ -1,4 +1,4 @@
-import { Router, RouterModule } '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { PhotosComponent } from './photos.component';
 import { PhotoDetailsComponent } from './photo-details.component';

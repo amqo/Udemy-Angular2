@@ -1,4 +1,4 @@
-import { Router, RouterModule } '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { MessagesComponent } from './messages/messages.component';
