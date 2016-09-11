@@ -9,14 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var PhotoDetailsComponent = (function () {
-    function PhotoDetailsComponent() {
+    function PhotoDetailsComponent(_route) {
+        this._route = _route;
     }
+    PhotoDetailsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this._route.params.subscribe(function (params) {
+            _this.id = +params["id"];
+        });
+    };
+    PhotoDetailsComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
     PhotoDetailsComponent = __decorate([
         core_1.Component({
-            template: "<h1>Photo Details</h1>\n    "
+            template: "\n      <h1>Photo Details for Photo {{ id }}</h1>\n    "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute])
     ], PhotoDetailsComponent);
     return PhotoDetailsComponent;
 }());
