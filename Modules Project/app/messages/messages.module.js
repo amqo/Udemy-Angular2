@@ -9,21 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var messages_module_1 = require('./messages/messages.module');
-var app_component_1 = require('./app.component');
-var AppModule = (function () {
-    function AppModule() {
+var forms_1 = require('@angular/forms');
+var common_1 = require('@angular/common');
+var messages_component_1 = require('./messages.component');
+var messages_service_1 = require('./messages.service');
+var MessagesModule = (function () {
+    function MessagesModule() {
     }
-    AppModule = __decorate([
+    MessagesModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, messages_module_1.MessagesModule],
-            declarations: [app_component_1.AppComponent],
-            bootstrap: [app_component_1.AppComponent]
+            imports: [forms_1.FormsModule, common_1.CommonModule],
+            declarations: [messages_component_1.MessagesComponent],
+            providers: [messages_service_1.MessagesService],
+            exports: [messages_component_1.MessagesComponent]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], MessagesModule);
+    return MessagesModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.MessagesModule = MessagesModule;
+//# sourceMappingURL=messages.module.js.map
